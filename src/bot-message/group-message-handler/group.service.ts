@@ -30,6 +30,7 @@ export class GroupMessageHandlerService {
     };
     private connectionGroupList: Array<number> = [];
     private messageHandlerMap: {} // 不同消息关键字触发的逻辑
+    private cacheOtherConnectionGroup = {};
 
     constructor(
         private readonly botSendService: BotSendService,
@@ -50,6 +51,7 @@ export class GroupMessageHandlerService {
         this.handleGroupChatMessage(message);
     }
 
+    // 处理群消息
     async handleGroupChatMessage(message: GroupChatMessage): Promise<void> {
         this.forwardGroupMessage(message);
         this.messageChainResolve(message);
@@ -69,9 +71,10 @@ export class GroupMessageHandlerService {
             // text:  `${message.sender.memberName}（来源：${message.sender.group.name}）\n------------------------------------\n`，
             text: this.getSenderInfoText(message.sender)
         }
-        message.messageChain.unshift(senderInfo);
+        
         // 由于是多个群转发消息，所以回复和@不支持
-        // message.messageChain = await this.resolveMessageChain(message.messageChain, message);
+        message.messageChain = await this.transformMessageChain(message);
+        message.messageChain.unshift(senderInfo);
 
         if (this.checkIsInConnectionGroup(message?.sender?.group)) {
             const otherGroupList = this.getOtherConnectionGroupList(message?.sender?.group?.id);
@@ -93,8 +96,9 @@ export class GroupMessageHandlerService {
         return `『  ${senderName}（${identity}➻${this.connectionGroupList.indexOf(roomId) + 1}群）』：`;
     }
 
-    // 解析当前消息内容
-    async resolveMessageChain(messageChain: MessageChain, message: GroupChatMessage): Promise<MessageChain> {
+    // 转换转发消息无法正确识别的内容
+    async transformMessageChain(message: GroupChatMessage): Promise<MessageChain> {
+        const messageChain = message.messageChain;
         let result: MessageChain = [];
         while(messageChain.length) {
             let item = messageChain.shift();
@@ -124,8 +128,12 @@ export class GroupMessageHandlerService {
     }
     // 获取设定的转发群内其他群号
     getOtherConnectionGroupList(id: number): Array<number> {
-        return this.connectionGroupList.reduce((pre: Array<number>, cur: number) => {
+        // 如果存在缓存则无需重新计算
+        if (this.cacheOtherConnectionGroup[id]) return this.cacheOtherConnectionGroup[id];
+        const result = this.connectionGroupList.reduce((pre: Array<number>, cur: number) => {
             return pre.concat(cur === id ? [] : cur)
         }, [])
+        this.cacheOtherConnectionGroup[id] = result;
+        return result;
     }
 }
