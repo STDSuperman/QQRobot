@@ -11,8 +11,8 @@ export default {
     CONNECTION_GROUP_LIST: [
         704915550,
         849247690,
+        687817188,
         // 851937215
-        687817188
     ],
     BotHttpConfig: {
         timeout: 5000,

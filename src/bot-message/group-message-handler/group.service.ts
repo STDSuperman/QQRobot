@@ -11,9 +11,15 @@ import { VoteKickService } from './vote.service'
 import { TianXingMessageService } from './tianxing.service'
 import {
     GroupChatMessage,
-    Group
+    Group,
+    Sender,
 } from './interface/chat.interface';
-import { MessageChainItemType, MessageChainItemPlain, MessageChainItem, MessageChain } from '@src/bot-message/interface/message.interface'
+import { 
+    MessageChainItemType,
+    MessageChainItemPlain,
+    MessageChainItem,
+    MessageChain
+} from '@src/bot-message/interface/message.interface'
 
 @Injectable()
 export class GroupMessageHandlerService {
@@ -61,7 +67,7 @@ export class GroupMessageHandlerService {
         const senderInfo: MessageChainItem = {
             type: MessageChainItemType.Plain,
             // text:  `${message.sender.memberName}（来源：${message.sender.group.name}）\n------------------------------------\n`，
-            text: `${message.sender.memberName}（${ this.permissionShowMap[message.sender.permission]}）：`
+            text: this.getSenderInfoText(message.sender)
         }
         message.messageChain.unshift(senderInfo);
         // 由于是多个群转发消息，所以回复和@不支持
@@ -78,6 +84,15 @@ export class GroupMessageHandlerService {
             })
         }
     }
+
+    // 获取标识用户信息相关文案
+    getSenderInfoText(sender: Sender) {
+        const roomId = sender.group.id;
+        const identity = this.permissionShowMap[sender.permission];
+        const senderName = sender.memberName;
+        return `『  ${senderName}（${identity}➻${this.connectionGroupList.indexOf(roomId) + 1}群）』：`;
+    }
+
     // 解析当前消息内容
     async resolveMessageChain(messageChain: MessageChain, message: GroupChatMessage): Promise<MessageChain> {
         let result: MessageChain = [];
