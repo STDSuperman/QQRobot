@@ -7,7 +7,7 @@ import * as path from 'path';
 import { EnvConfig } from '@src/config/config.interface'
 import UserConfig from '../../config'
 
-const envConfig = dotenv.parse(fs.readFileSync(path.resolve(__dirname, '../.env'))) || {} as EnvConfig;
+const envConfig = dotenv.parse(fs.readFileSync(path.resolve(process.cwd(), '.env'))) || {} as EnvConfig;
 @Module({
     imports: [
         CacheModule.registerAsync({

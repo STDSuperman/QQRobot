@@ -9,7 +9,7 @@ import { CacheService } from '@src/redis-cache/cache.service'
 @Injectable()
 export class ConfigService{
     private globalConfig: GlobalConfig & EnvConfig;
-    private envPath: string = path.resolve(__dirname, '../.env')
+    private envPath: string = path.resolve(process.cwd(), '.env')
 
     constructor(
         private readonly redisCacheService: CacheService
@@ -26,7 +26,6 @@ export class ConfigService{
                 baseURL: BOT_BASE_URL
             }
         }) as GlobalConfig & EnvConfig;
-        console.log(this.globalConfig);
     }
 
     get<K extends keyof (GlobalConfig & EnvConfig)>(key: K) {
