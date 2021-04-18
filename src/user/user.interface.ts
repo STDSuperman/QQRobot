@@ -16,7 +16,7 @@ export interface KickMemberPayload {
     memberId: number;
     msg?: string;
 }
-type LoginPayloadArgs = [string, string];
+type LoginPayloadArgs = [number, string];
 export interface LoginPayload {
     authKey: string;
     name: string;

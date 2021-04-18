@@ -24,7 +24,7 @@ export class WsGateway implements OnModuleInit {
 
     async onModuleInit() {
         const sessionKey = await this.wsService.getSessionKey();
-        this.clientServer = new ws(`ws://localhost:${this.configService.get('BOT_SERVER_PORT')}/message?sessionKey=${sessionKey}`);
+        this.clientServer = new ws(`ws://${this.configService.get('SERVER_HOST')}:${this.configService.get('BOT_SERVER_PORT')}/message?sessionKey=${sessionKey}`);
         this.clientServer.on('open', (e) => {
             console.log('ws connection');
         })

@@ -38,7 +38,7 @@ export class WsService {
         if (!sessionKey) return false;
         return this.http.post('/verify', {
             sessionKey,
-            qq: this.configService.get('QQ')
+            qq: this.configService.get('QQAccount')
         })
         .toPromise()
         .then(async res => {

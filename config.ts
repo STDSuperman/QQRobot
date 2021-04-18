@@ -1,11 +1,9 @@
-const BOT_BASE_URL = "http://localhost:9999";
+const BOT_BASE_URL = ''; // 后续会从env读取赋值
 
 export default {
     AUTH_KEY: "1234567890",
-    QQ: 2738794211,
     BOT_BASE_URL,
     BOT_SERVER_PORT: 9999,
-    REDIS_HOST: 'localhost',
     CACHE_TTL: 7890000,
     REDIS_PORT: 6379,
     CONNECTION_GROUP_LIST: [
