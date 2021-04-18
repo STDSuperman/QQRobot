@@ -4,14 +4,12 @@
 
 import { Injectable } from '@nestjs/common'
 import { OnEvent } from '@nestjs/event-emitter';
-import { BotSendService } from '@src/bot-send/send.service';
 import { ConfigService } from '@src/config/config.service';
-import { CommonService } from '@src/bot-message/common.service'
+import { CommonService } from '@src/bot-message/common-module/common.service'
 import { VoteKickService } from './vote.service'
-import { TianXingMessageService } from './tianxing.service'
+import { TianXingMessageService } from '@src/bot-message/tianxing.service'
 import {
     GroupChatMessage,
-    Group,
     Sender,
 } from './interface/chat.interface';
 import { 
@@ -30,10 +28,8 @@ export class GroupMessageHandlerService {
     };
     private connectionGroupList: Array<number> = [];
     private messageHandlerMap: {} // 不同消息关键字触发的逻辑
-    private cacheOtherConnectionGroup = {};
 
     constructor(
-        private readonly botSendService: BotSendService,
         private configService: ConfigService,
         private voteKickService: VoteKickService,
         private commonService: CommonService,
@@ -75,16 +71,8 @@ export class GroupMessageHandlerService {
         // 由于是多个群转发消息，所以回复和@不支持
         message.messageChain = await this.transformMessageChain(message);
         message.messageChain.unshift(senderInfo);
-
-        if (this.checkIsInConnectionGroup(message?.sender?.group)) {
-            const otherGroupList = this.getOtherConnectionGroupList(message?.sender?.group?.id);
-            otherGroupList.forEach(async id => {
-                this.botSendService.sendGroupMessage({
-                    sessionKey: await this.configService.getRedisConfig('sessionKey'),
-                    target: id,
-                    messageChain: message.messageChain
-                });
-            })
+        if (this.commonService.checkIsInConnectionGroup(message?.sender?.group)) {
+            this.commonService.sendMessageToGroupList(message, false);
         }
     }
 
@@ -119,21 +107,6 @@ export class GroupMessageHandlerService {
             }
             result.push(item);
         }
-        return result;
-    }
-
-    // 判断当前群是否包含在设定的转发群内
-    checkIsInConnectionGroup(group: Group): boolean {
-        return this.connectionGroupList.includes(group?.id);
-    }
-    // 获取设定的转发群内其他群号
-    getOtherConnectionGroupList(id: number): Array<number> {
-        // 如果存在缓存则无需重新计算
-        if (this.cacheOtherConnectionGroup[id]) return this.cacheOtherConnectionGroup[id];
-        const result = this.connectionGroupList.reduce((pre: Array<number>, cur: number) => {
-            return pre.concat(cur === id ? [] : cur)
-        }, [])
-        this.cacheOtherConnectionGroup[id] = result;
         return result;
     }
 }

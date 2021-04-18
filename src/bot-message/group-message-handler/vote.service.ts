@@ -6,7 +6,7 @@ import { Injectable } from '@nestjs/common';
 import { BotSendService } from '@src/bot-send/send.service';
 import { ConfigService } from '@src/config/config.service';
 import { UserService } from '@src/user/user.service'
-import { CommonService } from '@src/bot-message/common.service'
+import { CommonService } from '@src/bot-message/common-module/common.service'
 import { GroupChatMessage } from './interface/chat.interface';
 import { MessageChainItemType } from '@src/bot-message/interface/message.interface'
 
