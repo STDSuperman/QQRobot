@@ -13,7 +13,7 @@ export class MiraiService {
     }
 
     async init() {
-        this.registerCommand();
+        // this.registerCommand();
     }
 
     async registerCommand() {
