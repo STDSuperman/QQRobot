@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import * as dotenv from 'dotenv';
-import * as fs from 'fs';
 import * as path from 'path';
 import { GlobalConfig, EnvConfig } from './config.interface'
 import UserConfig from '../../config'
 import { CacheService } from '@src/redis-cache/cache.service'
+import { getEnvConfig } from '@src/common/utils/index'
 
 @Injectable()
 export class ConfigService{
@@ -14,10 +13,8 @@ export class ConfigService{
     constructor(
         private readonly redisCacheService: CacheService
     ) {
-        let envConfig: EnvConfig = {};
-        if (fs.existsSync(this.envPath)) {
-            envConfig = dotenv.parse(fs.readFileSync(this.envPath)) || {} as EnvConfig;
-        }
+        let envConfig: EnvConfig = getEnvConfig(this.envPath);
+        console.log(envConfig);
         const BOT_BASE_URL = `http://${envConfig.SERVER_HOST}:${UserConfig.BOT_SERVER_PORT}`;
         this.globalConfig = Object.assign({}, UserConfig, envConfig as EnvConfig, {
             BOT_BASE_URL,

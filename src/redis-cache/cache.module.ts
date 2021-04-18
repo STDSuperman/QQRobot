@@ -1,13 +1,12 @@
 import { Module, CacheModule } from '@nestjs/common';
 import * as redisStore from 'cache-manager-redis-store';
 import { CacheService } from './cache.service'
-import * as dotenv from 'dotenv';
-import * as fs from 'fs';
 import * as path from 'path';
 import { EnvConfig } from '@src/config/config.interface'
 import UserConfig from '../../config'
+import { getEnvConfig } from '@src/common/utils/index'
 
-const envConfig = dotenv.parse(fs.readFileSync(path.resolve(process.cwd(), '.env'))) || {} as EnvConfig;
+const envConfig: EnvConfig = getEnvConfig(path.resolve(process.cwd(), '.env'));
 @Module({
     imports: [
         CacheModule.registerAsync({
