@@ -86,7 +86,7 @@ export class GroupMessageHandlerService {
 
     // 转换转发消息无法正确识别的内容
     async transformMessageChain(message: GroupChatMessage): Promise<MessageChain> {
-        const messageChain = message.messageChain;
+        const messageChain = [...message.messageChain];
         let result: MessageChain = [];
         while(messageChain.length) {
             let item = messageChain.shift();

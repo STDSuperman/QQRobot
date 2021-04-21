@@ -17,7 +17,7 @@ export class UserService {
             authKey: this.configService.get('AUTH_KEY'),
             name: 'login',
             args: [
-                await this.configService.get('QQAccount'),
+                +await this.configService.get('QQAccount'),
                 await this.configService.get('QQPassword')
             ]
         }

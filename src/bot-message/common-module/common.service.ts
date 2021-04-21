@@ -40,7 +40,7 @@ export class CommonService {
             if (
                 (item.type === MessageChainItemType.At)
             ) {
-                if (item.target === this.configService.get('QQAccount')) {
+                if (item.target === +this.configService.get('QQAccount')) {
                     isAtMine = true;
                 } else {
                     otherAtMember.push(item.target);

@@ -17,7 +17,7 @@ export interface RedisConfig {
 
 export interface EnvConfig {
     TIAN_API_KEY?: string;
-    QQAccount?: number;
+    QQAccount?: string;
     QQPassword?: string;
     SERVER_HOST?: string;
 }
