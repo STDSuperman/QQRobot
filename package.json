@@ -29,7 +29,6 @@
     "@nestjs/platform-express": "^7.6.13",
     "@nestjs/platform-ws": "^7.6.15",
     "@nestjs/websockets": "^7.6.15",
-    "@types/winston": "^2.4.4",
     "cache-manager": "^3.4.1",
     "cache-manager-redis-store": "^2.0.0",
     "dotenv": "^8.2.0",
