@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import * as path from 'path';
 import { GlobalConfig, EnvConfig } from './config.interface'
 import UserConfig from '../../config'
-import { CacheService } from '@src/redis-cache/cache.service'
-import { getEnvConfig } from '@src/common/utils/index'
+import { CacheService } from '@/redis-cache/cache.service'
+import { getEnvConfig } from '@/common/utils/index'
 
 @Injectable()
 export class ConfigService{

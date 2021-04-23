@@ -12,7 +12,7 @@
     "baseUrl": "./",
     "incremental": true,
     "paths": {
-      "@src/*": ["src/*"]
+      "@/*": ["src/*"]
     }
   }
 }

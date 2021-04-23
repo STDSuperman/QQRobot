@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common'
-import { MemberInfo } from '@src/user/user.interface';
-import { UserService } from '@src/user/user.service'
-import { ConfigService } from '@src/config/config.service';
+import { MemberInfo } from '@/user/user.interface';
+import { UserService } from '@/user/user.service'
+import { ConfigService } from '@/config/config.service';
 import {
     GroupChatMessage,
     Group
-} from '@src/bot-message/group-message-handler/interface/chat.interface';
-import { FriendMessage } from '@src/bot-message/friend-message-handler/friend.interface'
-import { MessageChainItemType } from '@src/bot-message/interface/message.interface'
-import { BotSendService } from '@src/bot-send/send.service';
-import { SendFriendMessage } from '@src/bot-send/interface/send.interface'
+} from '@/bot-message/group-message-handler/interface/chat.interface';
+import { FriendMessage } from '@/bot-message/friend-message-handler/friend.interface'
+import { MessageChainItemType } from '@/bot-message/interface/message.interface'
+import { BotSendService } from '@/bot-send/send.service';
+import { SendFriendMessage } from '@/bot-send/interface/send.interface'
 
 @Injectable()
 export class CommonService {

@@ -1,5 +1,5 @@
 import { Injectable, HttpService } from '@nestjs/common'
-import { ConfigService } from '@src/config/config.service';
+import { ConfigService } from '@/config/config.service';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { map } from 'rxjs/operators';
 import { MemberInfo, MuteMemberPayload, KickMemberPayload, LoginPayload } from './user.interface'

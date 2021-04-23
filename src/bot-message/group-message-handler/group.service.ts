@@ -4,10 +4,10 @@
 
 import { Injectable } from '@nestjs/common'
 import { OnEvent } from '@nestjs/event-emitter';
-import { ConfigService } from '@src/config/config.service';
-import { CommonService } from '@src/bot-message/common-module/common.service'
+import { ConfigService } from '@/config/config.service';
+import { CommonService } from '@/bot-message/common-module/common.service'
 import { VoteKickService } from './vote.service'
-import { TianXingMessageService } from '@src/bot-message/tianxing.service'
+import { TianXingMessageService } from '@/bot-message/tianxing.service'
 import {
     GroupChatMessage,
     Sender,
@@ -17,7 +17,7 @@ import {
     MessageChainItemPlain,
     MessageChainItem,
     MessageChain
-} from '@src/bot-message/interface/message.interface'
+} from '@/bot-message/interface/message.interface'
 
 @Injectable()
 export class GroupMessageHandlerService {

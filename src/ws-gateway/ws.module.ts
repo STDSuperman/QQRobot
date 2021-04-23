@@ -2,7 +2,7 @@ import { Module, HttpModule } from '@nestjs/common';
 import { WsGateway } from './ws.gateway';
 import { WsService } from './ws.service';
 import { ConfigService } from '../config/config.service';
-import { UserService } from '@src/user/user.service'
+import { UserService } from '@/user/user.service'
 @Module({
   imports: [
     HttpModule.registerAsync({

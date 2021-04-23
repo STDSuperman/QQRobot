@@ -1,5 +1,5 @@
 import { Injectable, HttpService } from '@nestjs/common';
-import { ConfigService } from '@src/config/config.service';
+import { ConfigService } from '@/config/config.service';
 import { map } from 'rxjs/operators';
 import { RainbowFartOrTianGouResponse } from './interface/tian.interface'
 

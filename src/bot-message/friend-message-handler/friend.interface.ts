@@ -1,4 +1,4 @@
-import { MessageType, MessageChain } from '@src/bot-message/interface/message.interface'
+import { MessageType, MessageChain } from '@/bot-message/interface/message.interface'
 
 export interface FriendMessage {
     type: MessageType.FriendMessage;

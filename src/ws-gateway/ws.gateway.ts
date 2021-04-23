@@ -9,12 +9,14 @@ import * as ws from 'ws';
 import { WsService } from './ws.service'
 import { ConfigService } from '../config/config.service';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { LoggerService } from '@/logger/logger.service';
 @WebSocketGateway()
 export class WsGateway implements OnModuleInit {
     constructor(
         private readonly wsService: WsService,
         private readonly configService: ConfigService,
-        private readonly eventEmitter: EventEmitter2
+        private readonly eventEmitter: EventEmitter2,
+        private readonly logger: LoggerService
     ) {}
 
     @WebSocketServer()
@@ -28,11 +30,13 @@ export class WsGateway implements OnModuleInit {
         this.clientServer.on('open', (e) => {
             console.log('ws connection');
         })
-        this.clientServer.on('close', function close() {
+        this.clientServer.on('close', (e) => {
             console.log('ws disconnected');
+            this.logger.warn(JSON.stringify(e))
         });
         this.clientServer.on('error', e => {
             console.log(e);
+            this.logger.error(JSON.stringify(e))
         })
         this.clientServer.on('message', (botMessage: string = '') => {
             this.eventEmitter.emit(

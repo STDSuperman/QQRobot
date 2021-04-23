@@ -1,7 +1,7 @@
 import { Injectable, HttpService } from '@nestjs/common';
 import { ConfigService } from '../config/config.service';
 import { map } from 'rxjs/operators';
-import { UserService } from '@src/user/user.service'
+import { UserService } from '@/user/user.service'
 @Injectable()
 export class WsService {
     constructor(

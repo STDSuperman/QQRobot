@@ -5,13 +5,13 @@
 import { Injectable } from '@nestjs/common'
 import {
     GroupChatMessage
-} from '@src/bot-message/group-message-handler/interface/chat.interface';
-import { CommonService } from '@src/bot-message/common-module/common.service'
-import { TianService } from '@src/tian-api/tian.service';
-import { BotSendService } from '@src/bot-send/send.service';
-import { ConfigService } from '@src/config/config.service';
-import { MessageChainItemType } from '@src/bot-message/interface/message.interface'
-import { FriendMessage } from '@src/bot-message/friend-message-handler/friend.interface'
+} from '@/bot-message/group-message-handler/interface/chat.interface';
+import { CommonService } from '@/bot-message/common-module/common.service'
+import { TianService } from '@/tian-api/tian.service';
+import { BotSendService } from '@/bot-send/send.service';
+import { ConfigService } from '@/config/config.service';
+import { MessageChainItemType } from '@/bot-message/interface/message.interface'
+import { FriendMessage } from '@/bot-message/friend-message-handler/friend.interface'
 
 type MessageType = FriendMessage | GroupChatMessage;
 
