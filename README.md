@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="http://img.qqkuzu.com/uploads/5u527159265b3230038454c26.jpg" width="200" height="200" alt="QQRobot" style="border-radius: 50%">
+  <img src="https://blog-images-1257398419.cos.ap-nanjing.myqcloud.com/github/robot-avatar.jpg" width="200" height="200" alt="QQRobot" style="border-radius: 50%">
 </p>
 
 <div align="center">
@@ -48,7 +48,7 @@ _✨ 基于 [Mirai](https://github.com/mamoe/mirai) + [mirai-api-http](https://g
 
 1. 安装`Mirai Console Loader`：[相关安装地址](https://github.com/iTXTech/mirai-console-loader)。
 > 这里笔者采用它提供的自动安装方式未成功，故采用的手动方式，如果自动安装不行，建议采用手动安装，手动安装的话会需要你安装一个大于11的JDK，这里建议采用开源版本的。
-2. 使用`Mirai Console Loader`安装`mirai-api-http`插件。
+2. 使用`Mirai Console Loader`安装[mirai-api-http](https://github.com/project-mirai/mirai-api-http)插件。
 ```shell
 mcl --update-package net.mamoe:mirai-api-http --channel stable --type plugin
 ```
