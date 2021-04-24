@@ -26,7 +26,7 @@ _✨ 基于 [Mirai](https://github.com/mamoe/mirai) + [mirai-api-http](https://g
   <img src="https://img.shields.io/github/package-json/dependency-version/STDSuperman/QQRobot/winston">
 </p>
 
-## 介绍
+## 概述
 
 基于`Mirai`对`QQ`各项事件监听与收发功能，支持自定义组合操作`QQ`能力，同时借助`Mirai-Api-Http`封装提供`RESTful API`，实现对其他语言的支持。
 
