@@ -69,21 +69,15 @@ git clone git@github.com:STDSuperman/QQRobot.git
 #### 项目启动
 进入克隆后的项目，执行安装命令，安装完毕之后执行启动命令。
 ##### 使用npm
-安装：
+
 ```shell
 npm i
-```
-启动：
-```shell
 npm run start
 ```
 
 ##### 使用yarn
-安装：
+
 ```shell
 yarn
-```
-启动：
-```shell
 yarn start
 ```
