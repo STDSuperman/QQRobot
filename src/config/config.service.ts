@@ -14,7 +14,6 @@ export class ConfigService{
         private readonly redisCacheService: CacheService
     ) {
         let envConfig: EnvConfig = getEnvConfig(this.envPath);
-        console.log(envConfig);
         const BOT_BASE_URL = `http://${envConfig.SERVER_HOST}:${UserConfig.BOT_SERVER_PORT}`;
         this.globalConfig = Object.assign({}, UserConfig, envConfig as EnvConfig, {
             BOT_BASE_URL,

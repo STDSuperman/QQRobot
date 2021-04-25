@@ -1,13 +1,16 @@
 import { Injectable, Logger  as AppLogger  } from '@nestjs/common';
 import * as winston from 'winston';
 import * as path from 'path';
+import { ConfigService } from '@/config/config.service';
 
 @Injectable()
 export class LoggerService extends  AppLogger  {
     private logger: Partial<winston.Logger> = {};
-    constructor() {
+    constructor(
+        private configService: ConfigService
+    ) {
         super();
-        const logDir = path.resolve(process.cwd(), 'src/logger/logs')
+        const logDir = this.configService.get('LOG_DIR');
         this.logger = winston.createLogger({
             format: winston.format.json(),
             transports: [

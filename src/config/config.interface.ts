@@ -7,6 +7,7 @@ export interface GlobalConfig {
     REDIS_PORT: number;
     CONNECTION_GROUP_LIST: Array<number>;
     BotHttpConfig: AxiosRequestConfig;
+    LOG_DIR: string;
 }
 
 export interface RedisConfig {
