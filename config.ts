@@ -9,9 +9,9 @@ export default {
     CACHE_TTL: 7890000,
     REDIS_PORT: 6379,
     CONNECTION_GROUP_LIST: [
-        // 704915550,
-        // 849247690,
-        // 687817188,
+        704915550,
+        849247690,
+        687817188,
         // 851937215
     ],
     BotHttpConfig: {
