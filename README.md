@@ -55,8 +55,26 @@ mcl --update-package net.mamoe:mirai-api-http --channel stable --type plugin
 
 相关`API`地址：[mirai-api-http API 文档](https://project-mirai.github.io/mirai-api-http/)
 > 这里主要是因为笔者服务端采用`Nodejs`环境进行开发，故需要该插件提供`RESTful`接口与`websocket`连接与`QQ`通信。
-3. 启动`MCL`（上面安装的）。
-4. 输入登录指令，将一个用于机器人的`QQ`号进行登录。
+#### 配置`mirai-api-http`全局配置：
+
+1. 按照官方文档在`Mirai Console Loader`安装目录下找到相关配置文件：`config/MiraiApiHttp(名字不一定叫这个，不过目录名一表示的含义是mirai-api-http的)/setting.yml` (没有则自行创建)
+2. 配置端口为`9999`（因为笔者项目指定的端口为这个，如果这里想自定义或者用系统默认的`8080`，则你需要将笔者项目根目录下`config.ts`文件中的`BOT_SERVER_PORT`改成你这里设置的端口）
+3. 修改`authKey`，或不修改，同时复制这个`authKey`，后续在笔者项目根目录下的`config.ts`中`AUTH_KEY`指定为这个
+4. 将`enableWebsocket`设置为`true`
+5. 将`heartbeat`中`enable`设置为`true`
+
+> 这里提到的`config.ts`是当前项目根目录下的配置文件，克隆项目后可以进行查看修改。
+
+这样差不多笔者准备需要你配置的地方改好了，其他如果需要自己自主定义的就按照官方文档自行修改，相应的也可能需要修改`config.ts`中配置。
+
+#### redis
+
+本项目需要依赖`redis`环境，故需要你安装并启动`redis`服务。
+
+#### 启动
+
+1. 启动`MCL`（上面安装的）。
+2. 输入登录指令，将一个用于机器人的`QQ`号进行登录。
 
 在上述步骤都完成之后，你需要安装的东西基本完毕了，可以启动本项目进行进一步服务端开发了。
 
@@ -66,7 +84,32 @@ mcl --update-package net.mamoe:mirai-api-http --channel stable --type plugin
 git clone git@github.com:STDSuperman/QQRobot.git
 ```
 
+#### 项目配置
+
+> `config.ts`文件中包含的配置以及含义请打开该文件查看注释部分。
+
+除了前面提到的需要修改`config.ts`配置之外，你需要在当前项目根目录下新建一个`.env`文件，用于配置一些私密数据，具体值如下：
+
+```env
+TIAN_API_KEY=xxx
+QQAccount=xxx
+QQPassword=xxx
+SERVER_HOST=xxx
+```
+
+##### 配置介绍
+
+| 配置项       | 相关介绍                                                     |                                               |
+| ------------ | ------------------------------------------------------------ | --------------------------------------------- |
+| TIAN_API_KEY | 天行API申请的`KEY`，需要你在[官网](https://www.tianapi.com/)进行申请，与此同时，你还需要申请[舔狗日记](https://www.tianapi.com/apiview/180)、[彩虹屁](https://www.tianapi.com/apiview/181)等天行`API`应用，都是免费的。 | 必填。否则无法使用相关`API`                   |
+| QQAccount    | 你登录的用作机器人的`QQ`账号                                 | 可选。（目前使用该配置的功能`mirai`暂未支持） |
+| QQPassword   | 你登录的机器人密码                                           | 可选。（目前使用该配置的功能`mirai`暂未支持） |
+| SERVER_HOST  | 你登录的`mirai`服务地址（如果本机就`127.0.0.1`或`localhost`即可） | 必填。                                        |
+
+
+
 #### 项目启动
+
 进入克隆后的项目，执行安装命令，安装完毕之后执行启动命令。
 ##### 使用npm
 
