@@ -2,12 +2,14 @@ import { Injectable, HttpService } from '@nestjs/common';
 import { ConfigService } from '../config/config.service';
 import { map } from 'rxjs/operators';
 import { UserService } from '@/user/user.service'
+import { LoggerService } from '@/logger/logger.service'
 @Injectable()
 export class WsService {
     constructor(
         private http: HttpService,
         private configService: ConfigService,
-        private userService: UserService
+        private userService: UserService,
+        private logger: LoggerService
     ) {}
 
     async getSessionKey(): Promise<string> {
@@ -22,16 +24,19 @@ export class WsService {
         return sessionKey;
     }
     async getAuth(): Promise<string> {
-        return this.http.post('/auth', { authKey: this.configService.get('AUTH_KEY') })
+        return this.http.post('/auth', { authKey: 2313 })
             .pipe(
                 map(res => {
                     if (res.data.code === 0) {
                         return res.data.session
                     }
-                    console.error('get session key faild')
+                    this.logger.error(`get session key faild`);
                     return '';
                 })
-            ).toPromise();
+            ).toPromise()
+            .catch((e) => {
+                this.logger.error(`get session key faild: ${e.message || JSON.stringify(e)}`);
+            });
     }
 
     async verify(sessionKey: string): Promise<boolean> {
@@ -48,6 +53,9 @@ export class WsService {
             } else if (res.data.code === 2) { // 表示指定Bot不存在
                 await this.userService.login(); // 走登录逻辑
             }
+            return false;
+        }).catch((e) => {
+            this.logger.error(`verify session key faild: ${e.message || JSON.stringify(e)}`);
             return false;
         });
     }
