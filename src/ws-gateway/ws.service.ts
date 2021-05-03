@@ -24,7 +24,7 @@ export class WsService {
         return sessionKey;
     }
     async getAuth(): Promise<string> {
-        return this.http.post('/auth', { authKey: 2313 })
+        return this.http.post('/auth', { authKey: this.configService.get('AUTH_KEY') })
             .pipe(
                 map(res => {
                     if (res.data.code === 0) {
