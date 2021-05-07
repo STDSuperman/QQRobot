@@ -33,12 +33,10 @@ export class ConfigService{
     }
 
     async getRedisConfig(key) {
-        console.log('get', key, await this.redisCacheService.get(key));
         return this.redisCacheService.get(key);
     }
     
     async setRedisConfig(key: any, value: any): Promise<void> {
-        console.log('set', key, value);
         await this.redisCacheService.set(key, value)
     }
 }
