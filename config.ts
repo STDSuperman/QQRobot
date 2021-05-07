@@ -9,8 +9,8 @@ export default {
     BOT_BASE_URL,
     // mirai-api-http 配置的 port 内容
     BOT_SERVER_PORT: 9999,
-    // redis 缓存时间
-    // CACHE_TTL: 7890000,
+    // redis 缓存时间（这里设置一个很长的时间）
+    CACHE_TTL: 12 * 30 * 24 * 60 * 60 * 1000,
     // redis 的端口
     REDIS_PORT: 6379,
     // 机器人需要监听的QQ群列表（若不配置则群内艾特输入关键词无效）

@@ -10,6 +10,6 @@ import { UserService } from '@/user/user.service'
         inject: [ConfigService]
     })
   ],
-  providers: [WsGateway, WsService, UserService],
+  providers: [WsGateway, WsService, UserService]
 })
 export class WsGatewayModule {}
