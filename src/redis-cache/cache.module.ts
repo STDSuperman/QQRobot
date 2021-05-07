@@ -13,8 +13,7 @@ const envConfig: EnvConfig = getEnvConfig(path.resolve(process.cwd(), '.env'));
             useFactory: async () => ({
                 store: redisStore,
                 host: envConfig.SERVER_HOST,
-                port: UserConfig.REDIS_PORT,
-                ttl: UserConfig.CACHE_TTL
+                port: UserConfig.REDIS_PORT
             })
         })
     ],

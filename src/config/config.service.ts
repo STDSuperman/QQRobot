@@ -4,6 +4,7 @@ import { GlobalConfig, EnvConfig } from './config.interface'
 import UserConfig from '../../config'
 import { CacheService } from '@/redis-cache/cache.service'
 import { getEnvConfig } from '@/common/utils/index'
+import { WsService } from '@/ws-gateway/ws.service'
 
 @Injectable()
 export class ConfigService{
@@ -11,7 +12,8 @@ export class ConfigService{
     private envPath: string = path.resolve(process.cwd(), '.env')
 
     constructor(
-        private readonly redisCacheService: CacheService
+        private readonly redisCacheService: CacheService,
+        private readonly wsService: WsService
     ) {
         let envConfig: EnvConfig = getEnvConfig(this.envPath);
         const BOT_BASE_URL = `http://${envConfig.SERVER_HOST}:${UserConfig.BOT_SERVER_PORT}`;
@@ -33,7 +35,12 @@ export class ConfigService{
     }
 
     async getRedisConfig(key) {
-        return await this.redisCacheService.get(key);
+        let data = await this.redisCacheService.get(key);
+        if (key === 'sessionKey' && !data) {
+            data = await this.wsService.getSessionKey();
+            this.setRedisConfig('sessionKey', data);
+        }
+        return data;
     }
     
     async setRedisConfig(key: any, value: any): Promise<void> {
