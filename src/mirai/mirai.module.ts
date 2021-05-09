@@ -1,6 +1,7 @@
 import { Module, HttpModule } from '@nestjs/common';
 import { MiraiService } from './mirai.service';
 import { ConfigService } from '@/config/config.service';
+import { UserService } from '@/user/user.service';
 
 @Module({
     imports: [
@@ -9,7 +10,7 @@ import { ConfigService } from '@/config/config.service';
             inject: [ConfigService]
         })
     ],
-    providers: [MiraiService],
+    providers: [MiraiService, UserService],
     exports: [MiraiService]
 })
 export default class ConfigModule {}

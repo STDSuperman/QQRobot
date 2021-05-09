@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject, forwardRef } from '@nestjs/common';
 import * as path from 'path';
 import { GlobalConfig, EnvConfig } from './config.interface'
 import UserConfig from '../../config'
@@ -8,10 +8,10 @@ import { getEnvConfig } from '@/common/utils/index'
 @Injectable()
 export class ConfigService{
     private globalConfig: GlobalConfig & EnvConfig;
-    private envPath: string = path.resolve(process.cwd(), '.env')
+    private envPath: string = path.resolve(process.cwd(), '.env');
 
     constructor(
-        private readonly redisCacheService: CacheService
+        private readonly redisCacheService: CacheService,
     ) {
         let envConfig: EnvConfig = getEnvConfig(this.envPath);
         const BOT_BASE_URL = `http://${envConfig.SERVER_HOST}:${UserConfig.BOT_SERVER_PORT}`;
@@ -35,7 +35,7 @@ export class ConfigService{
     async getRedisConfig(key) {
         return this.redisCacheService.get(key);
     }
-    
+
     async setRedisConfig(key: any, value: any): Promise<void> {
         await this.redisCacheService.set(key, value)
     }

@@ -6,14 +6,14 @@ import {
 } from '@nestjs/websockets';
 import { OnModuleInit } from '@nestjs/common';
 import * as ws from 'ws';
-import { WsService } from './ws.service'
 import { ConfigService } from '../config/config.service';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { LoggerService } from '@/logger/logger.service';
+import { MiraiService } from '@/mirai/mirai.service'
 @WebSocketGateway()
 export class WsGateway implements OnModuleInit {
     constructor(
-        private readonly wsService: WsService,
+        private readonly miraiService: MiraiService,
         private readonly configService: ConfigService,
         private readonly eventEmitter: EventEmitter2,
         private readonly logger: LoggerService
@@ -25,7 +25,7 @@ export class WsGateway implements OnModuleInit {
     private clientServer: ws
 
     async onModuleInit() {
-        const sessionKey = await this.wsService.getSessionKey();
+        const sessionKey = await this.miraiService.getSessionKey();
         this.clientServer = new ws(`ws://${this.configService.get('SERVER_HOST')}:${this.configService.get('BOT_SERVER_PORT')}/message?sessionKey=${sessionKey}`);
         this.clientServer.on('open', (e) => {
             console.log('ws connection');

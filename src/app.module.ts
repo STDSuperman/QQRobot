@@ -7,6 +7,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import BotMessageModule from './bot-message/message.module';
 import UserModule from './user/user.module';
 import MiraiModule from './mirai/mirai.module';
+import GlobalModule from '@/global/global.module'
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import MiraiModule from './mirai/mirai.module';
     EventEmitterModule.forRoot(),
     BotMessageModule,
     UserModule,
-    MiraiModule
+    MiraiModule,
+    GlobalModule
   ],
   controllers: [AppController],
   providers: [AppService],
