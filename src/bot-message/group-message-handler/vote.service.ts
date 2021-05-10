@@ -31,20 +31,22 @@ export class VoteKickService {
     // 处理艾特自己的情况
     async handleIsAtMine(message: GroupChatMessage): Promise<void> {
         const roomId = message?.sender?.group?.id;
-        // 检测投票踢人功能开关状态
-        if (!await this.configService.getRedisConfig('voteKickStatus')) {
-            this.botSendService.sendGroupMessage({
-                sessionKey: await this.configService.getRedisConfig('sessionKey'),
-                target: roomId,
-                messageChain: [{
-                    type: MessageChainItemType.Plain,
-                    text: `(｀▽′)ψ  投票踢人功能当前暂未开启，请联系管理员开启  (｀▽′)ψ`
-                }]
-            });
-            return;
-        }
         const { checkRes, otherAtMember } = this.commonService.checkAtRobotAndInclueKey(message, '投票踢人');
-        if (checkRes) this.handleVoteKick(roomId, message?.sender.id, otherAtMember);
+        if (checkRes) {
+            // 检测投票踢人功能开关状态
+            if (!await this.configService.getRedisConfig('voteKickStatus')) {
+                this.botSendService.sendGroupMessage({
+                    sessionKey: await this.configService.getRedisConfig('sessionKey'),
+                    target: roomId,
+                    messageChain: [{
+                        type: MessageChainItemType.Plain,
+                        text: `(｀▽′)ψ  投票踢人功能当前暂未开启，请联系管理员开启  (｀▽′)ψ`
+                    }]
+                });
+                return;
+            }
+            this.handleVoteKick(roomId, message?.sender.id, otherAtMember);
+        }
     }
 
     // 校验用户是否已投
