@@ -67,6 +67,40 @@ mcl --update-package net.mamoe:mirai-api-http --channel stable --type plugin
 
 这样差不多笔者准备需要你配置的地方改好了，其他如果需要自己自主定义的就按照官方文档自行修改，相应的也可能需要修改`config.ts`中配置。
 
+##### 配置文件示例
+> 笔者的文件目录为：`config\net.mamoe.mirai-api-http\setting.yml`
+```yml
+cors: 
+  - '*'
+host: 0.0.0.0
+port: 9999
+authKey: 000000000
+cacheSize: 4096
+enableWebsocket: true
+report: 
+  enable: false
+  groupMessage: 
+    report: true
+  friendMessage: 
+    report: true
+  tempMessage: 
+    report: true
+  eventMessage: 
+    report: true
+  destinations: []
+  extraHeaders: {}
+
+heartbeat: 
+  enable: true
+  delay: 1000
+  period: 15000
+  destinations: []
+  extraBody: {}
+
+  extraHeaders: {}
+
+```
+
 #### redis
 
 本项目需要依赖`redis`环境，故需要你安装并启动`redis`服务。
