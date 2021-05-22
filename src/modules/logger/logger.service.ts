@@ -1,7 +1,7 @@
 import { Injectable, Logger  as AppLogger  } from '@nestjs/common';
 import * as winston from 'winston';
 import * as Transport from 'winston-transport';
-import { LowDbService, LowDBInstance } from '@/modules/db/db.service'
+import { LowDbService, LowDBInstance } from '@modules/db/db.service';
 @Injectable()
 export class LoggerService extends  AppLogger  {
     private logger: winston.Logger;
@@ -42,6 +42,10 @@ export class LoggerService extends  AppLogger  {
     verbose(message: any): void {
         this.logger.verbose(message);
     };
+
+    readErrorLog() {
+        return this.lowDB.readAll('errorLogs');
+    }
 }
 
 interface DBTransportOptions extends Transport.TransportStreamOptions {

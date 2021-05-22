@@ -1,8 +1,8 @@
 import { Injectable, HttpService, UsePipes } from '@nestjs/common';
 import { map } from 'rxjs/operators';
 import { SendGroupMessage, SendFriendMessage } from './interface/send.interface'
-import { LoggerService } from '@/modules/logger/logger.service'
-import { MiraiService } from '@/modules/mirai/mirai.service';
+import { LoggerService } from '@modules/logger/logger.service'
+import { MiraiService } from '@modules/mirai/mirai.service';
 
 @Injectable()
 export class BotSendService {

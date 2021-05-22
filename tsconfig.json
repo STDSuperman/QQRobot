@@ -12,7 +12,8 @@
     "baseUrl": "./",
     "incremental": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@modules/*": ["src/modules/*"]
     }
   }
 }

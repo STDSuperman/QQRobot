@@ -2,7 +2,7 @@ import { Injectable, Inject, forwardRef } from '@nestjs/common';
 import * as path from 'path';
 import { GlobalConfig, EnvConfig } from './config.interface'
 import UserConfig from '../../config'
-import { CacheService } from '@/modules/redis-cache/cache.service'
+import { CacheService } from '@modules/redis-cache/cache.service'
 import { getEnvConfig } from '@/common/utils/index'
 
 @Injectable()

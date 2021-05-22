@@ -1,9 +1,9 @@
 import { Injectable, HttpService } from '@nestjs/common';
 import { CommandRegisterPayload } from './mirai.interface'
-import { ConfigService } from '@/modules/config/config.service';
+import { ConfigService } from '@modules/config/config.service';
 import { map } from 'rxjs/operators';
-import { UserService } from '@/modules/user/user.service'
-import { LoggerService } from '@/modules/logger/logger.service'
+import { UserService } from '@modules/user/user.service'
+import { LoggerService } from '@modules/logger/logger.service'
 
 @Injectable()
 export class MiraiService {

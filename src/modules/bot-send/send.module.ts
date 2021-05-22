@@ -1,7 +1,7 @@
 import { Module, HttpModule } from '@nestjs/common';
 import { BotSendService } from './send.service'
 import { ConfigService } from '../config/config.service';
-import MiraiModule from '@/modules/mirai/mirai.module'
+import MiraiModule from '@modules/mirai/mirai.module'
 
 @Module({
     imports: [

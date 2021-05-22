@@ -1,4 +1,4 @@
-import { MessageChain } from '@/modules/bot-message/interface/message.interface'
+import { MessageChain } from '@modules/bot-message/interface/message.interface'
 
 export interface SendGroupMessage {
     sessionKey: string;

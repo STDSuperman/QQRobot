@@ -1,10 +1,10 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 import { FriendMessage } from './friend.interface';
-import { CommonService } from '@/modules/bot-message/common-module/common.service'
-import { ConfigService } from '@/modules/config/config.service';
-import { BotSendService } from '@/modules/bot-send/send.service';
-import { TianXingMessageService } from '@/modules/bot-message/tianxing.service'
+import { CommonService } from '@modules/bot-message/common-module/common.service'
+import { ConfigService } from '@modules/config/config.service';
+import { BotSendService } from '@modules/bot-send/send.service';
+import { TianXingMessageService } from '@modules/bot-message/tianxing.service'
 
 @Injectable()
 export class FriendMessageService implements OnModuleInit {

@@ -4,7 +4,8 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js', '.json'],
         alias: {
-            '@': path.resolve(__dirname, 'src')
+            '@': path.resolve(__dirname, 'src'),
+            '@modules': path.resolve(__dirname, 'src/modules')
         }
     },
     module: {
