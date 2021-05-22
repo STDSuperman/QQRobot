@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
-import { EnvConfig } from '@/config/config.interface'
+import { EnvConfig } from '@/modules/config/config.interface'
 
 export function getEnvConfig(path): EnvConfig {
     let envConfig: EnvConfig = {};
