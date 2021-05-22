@@ -5,7 +5,7 @@
 
 **/*.env
 
-**/database-file
+/database-file
 
 # Logs
 logs
