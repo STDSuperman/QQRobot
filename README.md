@@ -41,6 +41,7 @@ _✨ 基于 [Mirai](https://github.com/mamoe/mirai) + [mirai-api-http](https://g
 
 ## ✨预览
 <img src="https://blog-images-1257398419.cos.ap-nanjing.myqcloud.com/github/robot-preview-1.png" style="border: 1px solid #eee;padding: 5px;border-radius: 7px;box-shadow: 0 0 10px 1px #eee">
+
 ## 🚀 开发手册
 
 ### 环境准备
