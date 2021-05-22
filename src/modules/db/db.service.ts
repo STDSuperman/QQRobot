@@ -50,7 +50,7 @@ export class LowDbService {
         this.db.get(key).push(value).write();
     }
 
-    readAll(key) {
+    readAll<K extends keyof LowDBData>(key: K) {
         return this.db.has(key).value();
     }
 }

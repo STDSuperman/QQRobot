@@ -1,6 +1,6 @@
 import { Module, Global, HttpModule } from '@nestjs/common';
-import LoggerModule from '@/modules/logger/logger.module';
-import ConfigModule from '@/modules/config/config.module';
+import LoggerModule from '@modules/logger/logger.module';
+import ConfigModule from '@modules/config/config.module';
 
 @Global()
 @Module({

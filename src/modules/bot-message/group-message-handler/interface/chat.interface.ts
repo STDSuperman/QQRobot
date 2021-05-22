@@ -3,7 +3,7 @@
  * 类型太多了，完整的还是看官方文档吧
  * */
 
-import { MessageType, MessageChain } from '@/modules/bot-message/interface/message.interface'
+import { MessageType, MessageChain } from '@modules/bot-message/interface/message.interface'
 
 export enum MemberPermission {
     OWNER = 'OWNER',

@@ -1,13 +1,15 @@
 import { Controller, Get } from '@nestjs/common';
-import { ConfigService } from '@/modules/config/config.service';
+import { LoggerService } from './logger.service';
 
 @Controller('log')
 export class LoggerController {
-  constructor() {}
+  constructor(
+    private loggerService: LoggerService
+  ) {}
 
   @Get('/error')
   readErrorLog(): string {
-    return ''
+    return this.loggerService.readErrorLog();
   }
 
   @Get('/others')

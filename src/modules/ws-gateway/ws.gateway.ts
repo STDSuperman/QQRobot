@@ -8,8 +8,8 @@ import { OnModuleInit } from '@nestjs/common';
 import * as ws from 'ws';
 import { ConfigService } from '../config/config.service';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { LoggerService } from '@/modules/logger/logger.service';
-import { MiraiService } from '@/modules/mirai/mirai.service'
+import { LoggerService } from '@modules/logger/logger.service';
+import { MiraiService } from '@modules/mirai/mirai.service'
 @WebSocketGateway()
 export class WsGateway implements OnModuleInit {
     constructor(

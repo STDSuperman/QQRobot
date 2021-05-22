@@ -1,7 +1,7 @@
 import { Module, HttpModule } from '@nestjs/common';
 import { MiraiService } from './mirai.service';
-import { ConfigService } from '@/modules/config/config.service';
-import { UserService } from '@/modules/user/user.service';
+import { ConfigService } from '@modules/config/config.service';
+import { UserService } from '@modules/user/user.service';
 
 @Module({
     imports: [
