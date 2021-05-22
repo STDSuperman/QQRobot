@@ -60,12 +60,12 @@ mcl --update-package net.mamoe:mirai-api-http --channel stable --type plugin
 #### 配置`mirai-api-http`全局配置：
 
 1. 按照官方文档在`Mirai Console Loader`安装目录下找到相关配置文件：`config/MiraiApiHttp(名字不一定叫这个，不过目录名一表示的含义是mirai-api-http的)/setting.yml` (没有则自行创建)
-2. 配置端口为`9999`（因为笔者项目指定的端口为这个，如果这里想自定义或者用系统默认的`8080`，则你需要将笔者项目 ==src目录下的config文件夹中index.ts文件== 中的`BOT_SERVER_PORT`改成你这里设置的端口）
+2. 配置端口为`9999`（因为笔者项目指定的端口为这个，如果这里想自定义或者用系统默认的`8080`，则你需要将笔者项目 `src/config/index.ts` 文件中的`BOT_SERVER_PORT`改成你这里设置的端口）
 3. 修改`authKey`，或不修改，同时复制这个`authKey`，后续在笔者项目`src/config/index.ts`中`AUTH_KEY`指定为这个
 4. 将`enableWebsocket`设置为`true`
 5. 将`heartbeat`中`enable`设置为`true`
 
-> 这里提到的配置文件位于：`src/config/index.ts`，克隆项目后可以进行查看修改。
+> 这里的`src/config/index.ts`主要用于一些全局配置项，克隆项目后可以进行查看修改。
 
 这样差不多笔者准备需要你配置的地方改好了，其他如果需要自己自主定义的就按照官方文档自行修改，相应的也可能需要修改`config/index.ts`中配置。
 
