@@ -51,6 +51,6 @@ export class LowDbService {
     }
 
     readAll<K extends keyof LowDBData>(key: K) {
-        return this.db.has(key).value();
+        return this.db.get(key).value();
     }
 }
