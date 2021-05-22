@@ -7,7 +7,8 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import BotMessageModule from './bot-message/message.module';
 import UserModule from './user/user.module';
 import MiraiModule from './mirai/mirai.module';
-import GlobalModule from '@/global/global.module'
+import GlobalModule from '@/global/global.module';
+import DbModule from '@/db/db.module'
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import GlobalModule from '@/global/global.module'
     BotMessageModule,
     UserModule,
     MiraiModule,
-    GlobalModule
+    GlobalModule,
+    DbModule
   ],
   controllers: [AppController],
   providers: [AppService],

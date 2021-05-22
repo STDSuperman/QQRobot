@@ -1,26 +1,26 @@
 import { Injectable, Logger  as AppLogger  } from '@nestjs/common';
 import * as winston from 'winston';
-import * as path from 'path';
-import { ConfigService } from '@/config/config.service';
-
+import * as Transport from 'winston-transport';
+import { LowDbService, LowDBInstance } from '@/db/db.service'
 @Injectable()
 export class LoggerService extends  AppLogger  {
-    private logger: Partial<winston.Logger> = {};
+    private logger: winston.Logger;
     constructor(
-        private configService: ConfigService
+        private lowDB: LowDbService
     ) {
         super();
-        const logDir = this.configService.get('LOG_DIR');
         this.logger = winston.createLogger({
             format: winston.format.json(),
             transports: [
-                new winston.transports.File({ filename: path.resolve(logDir, 'error.log'), level: 'error' }),
-                new winston.transports.File({ filename: path.resolve(logDir, 'others.log') }),
+                new DBTransport({ LowDBInstance: this.lowDB }),
                 new winston.transports.Console({format: winston.format.combine(
                     winston.format.colorize(),
-                    winston.format.simple()
+                    winston.format.simple(),
+                    winston.format.timestamp(),
+                    winston.format.prettyPrint()
                 )})
-            ]
+            ],
+            handleExceptions: true
         })
     }
 
@@ -42,4 +42,27 @@ export class LoggerService extends  AppLogger  {
     verbose(message: any): void {
         this.logger.verbose(message);
     };
+}
+
+interface DBTransportOptions extends Transport.TransportStreamOptions {
+    LowDBInstance: any
+}
+// 自定义winston transport
+class DBTransport extends Transport {
+    private DBInstance: LowDBInstance;
+    private options;
+    constructor(opts: DBTransportOptions) {
+        super(opts);
+        this.options = opts;
+        this.DBInstance = opts.LowDBInstance;
+    }
+
+    log({level, message}, callback) {
+        level === 'error' && this.DBInstance.pushOne('errorLogs', {
+            level,
+            message,
+            timestamp: new Date().toTimeString()
+        });
+        callback()
+    }
 }

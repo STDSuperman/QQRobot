@@ -16,6 +16,10 @@ module.exports = {
                 options: {
                     configFile: path.resolve(__dirname, './tsconfig.json')
                 }
+            }, {
+                test: /\.png|jpg|jpeg|svg/,
+                loader: 'file-loader',
+                exclude: /node_modules/
             }
         ]
     }

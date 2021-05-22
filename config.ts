@@ -15,9 +15,9 @@ export default {
     REDIS_PORT: 6379,
     // 机器人需要监听的QQ群列表（若不配置则群内艾特输入关键词无效）
     CONNECTION_GROUP_LIST: [
-        704915550,
-        849247690,
-        687817188,
+        // 704915550,
+        // 849247690,
+        // 687817188,
         // 851937215
     ],
     // 与mirai机器人服务通信的 axios 配置
@@ -25,7 +25,5 @@ export default {
         timeout: 5000,
         maxRedirects: 5,
         baseURL: BOT_BASE_URL
-    },
-    // 日志保存目录
-    LOG_DIR: path.resolve(process.cwd(), 'src/logger/logs'), // 日志保存目录
+    }
 }
