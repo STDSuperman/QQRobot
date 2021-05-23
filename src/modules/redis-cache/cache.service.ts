@@ -3,14 +3,14 @@ import { Cache } from 'cache-manager';
 
 @Injectable()
 export class CacheService {
-    constructor(@Inject(CACHE_MANAGER) private cache: Cache) {}
+	constructor(@Inject(CACHE_MANAGER) private cache: Cache) {}
 
-    async get(key: string) {
-        return await this.cache.get(key);
-    }
+	async get(key: string) {
+		return await this.cache.get(key);
+	}
 
-    async set(key: string, value: any): Promise<Boolean> {
-        await this.cache.set(key, value);
-        return true;
-    }
+	async set(key: string, value: any): Promise<boolean> {
+		await this.cache.set(key, value);
+		return true;
+	}
 }

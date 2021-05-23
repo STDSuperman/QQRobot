@@ -1,9 +1,9 @@
 export interface NewListItem {
-    content: string;
+	content: string;
 }
 
-export interface RainbowFartOrTianGouResponse{
-    code: number;
-    msg: string;
-    newslist: Array<NewListItem>;
+export interface RainbowFartOrTianGouResponse {
+	code: number;
+	msg: string;
+	newslist: Array<NewListItem>;
 }
