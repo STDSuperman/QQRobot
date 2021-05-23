@@ -52,11 +52,17 @@ _✨ 基于 [Mirai](https://github.com/mamoe/mirai) + [mirai-api-http](https://g
 > 当前项目依赖 `mirai-api-http` 版本为 1.x
 
 1. 安装`Mirai Console Loader`：[相关安装地址](https://github.com/iTXTech/mirai-console-loader)。
-> 这里笔者采用它提供的自动安装方式未成功，故采用的手动方式，如果自动安装不行，建议采用手动安装，手动安装的话会需要你安装一个大于11的JDK，这里建议采用开源版本的。
+
+建议优先尝试他的手动安装方式
+> 这里笔者采用它提供的自动安装方式未成功，故采用的手动方式，如果自动安装不行，建议采用手动安装，手动安装的话会需要你安装一个大于11的[JDK](http://jdk.java.net/archive/)，这里建议采用开源版本的。
 2. 使用`Mirai Console Loader`安装[mirai-api-http](https://github.com/project-mirai/mirai-api-http)插件。
+
+在当前安装路径下启动终端并中执行以下命令
 ```shell
-mcl --update-package net.mamoe:mirai-api-http --channel stable --type plugin
+./mcl --update-package net.mamoe:mirai-api-http --channel stable --type plugin
 ```
+
+执行完毕之后你可以通过执行`./mcl`命令直接启动，看`mirai`环境是否正常启动成功。
 
 相关`API`地址：[mirai-api-http API 文档](https://project-mirai.github.io/mirai-api-http/)
 > 这里主要是因为笔者服务端采用`Nodejs`环境进行开发，故需要该插件提供`RESTful`接口与`websocket`连接与`QQ`通信。
