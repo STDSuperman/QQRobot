@@ -21,9 +21,9 @@ export class ConfigService {
 				BOT_BASE_URL,
 				BotHttpConfig: {
 					...UserConfig.BotHttpConfig,
-					baseURL: BOT_BASE_URL,
-				},
-			},
+					baseURL: BOT_BASE_URL
+				}
+			}
 		) as GlobalConfig & EnvConfig;
 	}
 

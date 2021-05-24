@@ -6,10 +6,10 @@ import { TianService } from './tian.service';
 		HttpModule.register({
 			baseURL: 'http://api.tianapi.com',
 			timeout: 5000,
-			maxRedirects: 5,
-		}),
+			maxRedirects: 5
+		})
 	],
 	providers: [TianService],
-	exports: [TianService],
+	exports: [TianService]
 })
 export default class TianAPIModule {}

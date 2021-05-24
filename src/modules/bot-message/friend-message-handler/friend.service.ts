@@ -10,17 +10,17 @@ import { TianXingMessageService } from '@modules/bot-message/tianxing.service';
 export class FriendMessageService implements OnModuleInit {
 	private administrators: Array<number> = [2750556766];
 	private messageHandlerMap = {
-		tianXingType: this.tianXingMessageService.handler,
+		tianXingType: this.tianXingMessageService.handler
 	};
 
 	constructor(
 		private commonService: CommonService,
 		private configService: ConfigService,
 		private botService: BotSendService,
-		private tianXingMessageService: TianXingMessageService,
+		private tianXingMessageService: TianXingMessageService
 	) {
 		this.messageHandlerMap = {
-			tianXingType: this.tianXingMessageService.handler,
+			tianXingType: this.tianXingMessageService.handler
 		};
 	}
 
@@ -49,21 +49,21 @@ export class FriendMessageService implements OnModuleInit {
 		const { checkRes } = this.commonService.checkAtRobotAndInclueKey(
 			message,
 			'switchVoteKick',
-			true,
+			true
 		);
 		if (checkRes && this.checkOperationPermission(message.sender.id)) {
 			this.configService.setRedisConfig(
 				'voteKickStatus',
-				!(await this.configService.getRedisConfig('voteKickStatus')),
+				!(await this.configService.getRedisConfig('voteKickStatus'))
 			);
 			const currentVoteStatus = await this.configService.getRedisConfig(
-				'voteKickStatus',
+				'voteKickStatus'
 			);
 			this.commonService.sendFriendMessage(
 				message,
 				`当前投票踢人功能状态：${
 					currentVoteStatus ? '已开启' : '已关闭'
-				}`,
+				}`
 			);
 		}
 	}

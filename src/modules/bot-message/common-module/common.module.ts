@@ -6,6 +6,6 @@ import BotSendModule from '@modules/bot-send/send.module';
 @Module({
 	imports: [UserModule, BotSendModule],
 	providers: [CommonService],
-	exports: [CommonService],
+	exports: [CommonService]
 })
 export default class CommonModule {}

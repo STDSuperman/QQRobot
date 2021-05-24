@@ -8,10 +8,10 @@ import { UserService } from '@modules/user/user.service';
 		HttpModule.registerAsync({
 			useFactory: async (configService: ConfigService) =>
 				configService.get('BotHttpConfig'),
-			inject: [ConfigService],
-		}),
+			inject: [ConfigService]
+		})
 	],
 	providers: [MiraiService, UserService],
-	exports: [MiraiService],
+	exports: [MiraiService]
 })
 export default class ConfigModule {}

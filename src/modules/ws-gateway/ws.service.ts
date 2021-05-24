@@ -9,7 +9,7 @@ export class WsService {
 		private http: HttpService,
 		private configService: ConfigService,
 		private userService: UserService,
-		private logger: LoggerService,
+		private logger: LoggerService
 	) {}
 
 	async getSessionKey(): Promise<string> {
@@ -33,12 +33,12 @@ export class WsService {
 					}
 					this.logger.error(`get session key faild`);
 					return '';
-				}),
+				})
 			)
 			.toPromise()
 			.catch((e) => {
 				this.logger.error(
-					`get session key faild: ${e.message || JSON.stringify(e)}`,
+					`get session key faild: ${e.message || JSON.stringify(e)}`
 				);
 			});
 	}
@@ -48,7 +48,7 @@ export class WsService {
 		return this.http
 			.post('/verify', {
 				sessionKey,
-				qq: this.configService.get('QQAccount'),
+				qq: this.configService.get('QQAccount')
 			})
 			.toPromise()
 			.then(async (res) => {
@@ -65,7 +65,7 @@ export class WsService {
 				this.logger.error(
 					`verify session key faild: ${
 						e.message || JSON.stringify(e)
-					}`,
+					}`
 				);
 				return false;
 			});

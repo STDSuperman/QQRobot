@@ -8,11 +8,11 @@ import MiraiModule from '@modules/mirai/mirai.module';
 		HttpModule.registerAsync({
 			useFactory: async (configService: ConfigService) =>
 				configService.get('BotHttpConfig'),
-			inject: [ConfigService],
+			inject: [ConfigService]
 		}),
-		MiraiModule,
+		MiraiModule
 	],
 	providers: [BotSendService],
-	exports: [BotSendService],
+	exports: [BotSendService]
 })
 export default class BotSendModule {}

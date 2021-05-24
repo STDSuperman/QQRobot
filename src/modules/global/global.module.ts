@@ -5,6 +5,6 @@ import ConfigModule from '@modules/config/config.module';
 @Global()
 @Module({
 	imports: [LoggerModule, ConfigModule],
-	exports: [LoggerModule, ConfigModule],
+	exports: [LoggerModule, ConfigModule]
 })
 export default class GlobalModule {}

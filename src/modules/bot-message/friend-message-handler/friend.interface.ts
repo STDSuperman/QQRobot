@@ -1,6 +1,6 @@
 import {
 	MessageType,
-	MessageChain,
+	MessageChain
 } from '@modules/bot-message/interface/message.interface';
 
 export interface FriendMessage {

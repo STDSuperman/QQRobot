@@ -11,7 +11,7 @@ import TianModule from '@modules/tian-api/tian.module';
 	providers: [
 		GroupMessageHandlerService,
 		VoteKickService,
-		TianXingMessageService,
-	],
+		TianXingMessageService
+	]
 })
 export default class GroupMessageHandlerModule {}

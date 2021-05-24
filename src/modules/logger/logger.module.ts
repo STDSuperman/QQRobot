@@ -7,6 +7,6 @@ import DbModule from '@modules/db/db.module';
 	imports: [DbModule],
 	providers: [LoggerService],
 	controllers: [LoggerController],
-	exports: [LoggerService],
+	exports: [LoggerService]
 })
 export default class ConfigModule {}

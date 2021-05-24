@@ -5,13 +5,13 @@
 
 import {
 	MessageType,
-	MessageChain,
+	MessageChain
 } from '@modules/bot-message/interface/message.interface';
 
 export enum MemberPermission {
 	OWNER = 'OWNER',
 	ADMINISTRATOR = 'ADMINISTRATOR',
-	MEMBER = 'MEMBER',
+	MEMBER = 'MEMBER'
 }
 export interface Group {
 	id: number;

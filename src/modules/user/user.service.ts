@@ -6,14 +6,14 @@ import {
 	MemberInfo,
 	MuteMemberPayload,
 	KickMemberPayload,
-	LoginPayload,
+	LoginPayload
 } from './user.interface';
 
 @Injectable()
 export class UserService {
 	constructor(
 		private http: HttpService,
-		private configService: ConfigService,
+		private configService: ConfigService
 	) {}
 
 	// 机器人登录
@@ -23,15 +23,15 @@ export class UserService {
 			name: 'login',
 			args: [
 				+(await this.configService.get('QQAccount')),
-				await this.configService.get('QQPassword'),
-			],
+				await this.configService.get('QQPassword')
+			]
 		};
 		this.http
 			.post('/command/send', loginPayload)
 			.pipe(
 				map((res) => {
 					console.log(res.data);
-				}),
+				})
 			)
 			.toPromise();
 	}
@@ -39,23 +39,23 @@ export class UserService {
 	// 获取单个群员信息
 	async getGroupMemberInfo(
 		memberId: number,
-		roomId: number,
+		roomId: number
 	): Promise<MemberInfo> {
 		return this.http
 			.get<AxiosRequestConfig>(`/memberInfo`, {
 				params: {
 					sessionKey: await this.configService.getRedisConfig(
-						'sessionKey',
+						'sessionKey'
 					),
 					target: roomId,
-					memberId,
-				},
+					memberId
+				}
 			})
 			.pipe(
 				map((res: AxiosResponse) => {
 					if (res.data) return res.data as MemberInfo;
 					return {};
-				}),
+				})
 			)
 			.toPromise();
 	}
@@ -64,13 +64,13 @@ export class UserService {
 	async muteMember(
 		memberId: number,
 		roomId: number,
-		time: number,
+		time: number
 	): Promise<boolean> {
 		const muteMemberPayload: MuteMemberPayload = {
 			sessionKey: await this.configService.getRedisConfig('sessionKey'),
 			target: roomId,
 			memberId,
-			time,
+			time
 		};
 		return this.http
 			.post('/mute', muteMemberPayload)
@@ -78,7 +78,7 @@ export class UserService {
 				map((res) => {
 					if (res.data.code === 0) return true;
 					return false;
-				}),
+				})
 			)
 			.toPromise();
 	}
@@ -87,13 +87,13 @@ export class UserService {
 	async kickMember(
 		memberId: number,
 		roomId: number,
-		msg: string,
+		msg: string
 	): Promise<boolean> {
 		const kickMemberPayload: KickMemberPayload = {
 			sessionKey: await this.configService.getRedisConfig('sessionKey'),
 			target: roomId,
 			memberId,
-			msg,
+			msg
 		};
 		return this.http
 			.post('/kick', kickMemberPayload)
@@ -101,7 +101,7 @@ export class UserService {
 				map((res) => {
 					if (res.data.code === 0) return true;
 					return false;
-				}),
+				})
 			)
 			.toPromise();
 	}

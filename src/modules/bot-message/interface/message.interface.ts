@@ -1,7 +1,7 @@
 export enum MessageType {
 	GroupMessage = 'GroupMessage',
 	FriendMessage = 'FriendMessage',
-	TempMessage = 'TempMessage',
+	TempMessage = 'TempMessage'
 }
 
 export enum MessageChainItemType {
@@ -10,7 +10,7 @@ export enum MessageChainItemType {
 	Image = 'Image',
 	Face = 'Face',
 	Quote = 'Quote',
-	At = 'At',
+	At = 'At'
 }
 
 export interface MessageChainItemPlain {

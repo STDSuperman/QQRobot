@@ -26,7 +26,7 @@ export class LowDbService {
 	private dbFile = path.resolve(
 		process.cwd(),
 		this.dbDirectory,
-		'lowDB.json',
+		'lowDB.json'
 	);
 	constructor() {
 		this.init();

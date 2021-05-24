@@ -19,9 +19,9 @@ import DbModule from '@/modules/db/db.module';
 		UserModule,
 		MiraiModule,
 		GlobalModule,
-		DbModule,
+		DbModule
 	],
 	controllers: [AppController],
-	providers: [AppService],
+	providers: [AppService]
 })
 export class AppModule {}

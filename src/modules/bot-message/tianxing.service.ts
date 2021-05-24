@@ -20,7 +20,7 @@ export class TianXingMessageService {
 		private commonService: CommonService,
 		private tianXingHttpService: TianService,
 		private readonly botSendService: BotSendService,
-		private configService: ConfigService,
+		private configService: ConfigService
 	) {}
 
 	handler = (message: MessageType, isFriendMessage = false) => {
@@ -34,24 +34,24 @@ export class TianXingMessageService {
 		const { checkRes } = this.commonService.checkAtRobotAndInclueKey(
 			message,
 			'舔狗日记',
-			this.isFriendMessage,
+			this.isFriendMessage
 		);
 		if (checkRes) {
 			const tianGouOneContent = await this.tianXingHttpService.getTiangouOne();
 			message.messageChain = [
 				{
 					type: MessageChainItemType.Plain,
-					text: tianGouOneContent,
-				},
+					text: tianGouOneContent
+				}
 			];
 			this.isFriendMessage
 				? this.commonService.sendFriendMessage(
 						message as FriendMessage,
-						tianGouOneContent,
+						tianGouOneContent
 				  )
 				: this.commonService.sendMessageToGroupList(
 						message as GroupChatMessage,
-						true,
+						true
 				  );
 		}
 	}
@@ -61,24 +61,24 @@ export class TianXingMessageService {
 		const { checkRes } = this.commonService.checkAtRobotAndInclueKey(
 			message,
 			'彩虹屁',
-			this.isFriendMessage,
+			this.isFriendMessage
 		);
 		if (checkRes) {
 			const tianRainbowFart = await this.tianXingHttpService.getRainbowFart();
 			message.messageChain = [
 				{
 					type: MessageChainItemType.Plain,
-					text: tianRainbowFart,
-				},
+					text: tianRainbowFart
+				}
 			];
 			this.isFriendMessage
 				? this.commonService.sendFriendMessage(
 						message as FriendMessage,
-						tianRainbowFart,
+						tianRainbowFart
 				  )
 				: this.commonService.sendMessageToGroupList(
 						message as GroupChatMessage,
-						true,
+						true
 				  );
 		}
 	}
@@ -87,7 +87,7 @@ export class TianXingMessageService {
 		this.botSendService.sendGroupMessage({
 			sessionKey: await this.configService.getRedisConfig('sessionKey'),
 			target: roomId,
-			messageChain,
+			messageChain
 		});
 	}
 
@@ -95,17 +95,17 @@ export class TianXingMessageService {
 		message.messageChain = [
 			{
 				type: MessageChainItemType.Plain,
-				text,
-			},
+				text
+			}
 		];
 		this.isFriendMessage
 			? this.commonService.sendFriendMessage(
 					message as FriendMessage,
-					text,
+					text
 			  )
 			: this.commonService.sendMessageToGroupList(
 					message as GroupChatMessage,
-					true,
+					true
 			  );
 	}
 }

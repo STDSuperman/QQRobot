@@ -2,7 +2,7 @@ import {
 	Catch,
 	ExceptionFilter,
 	ArgumentsHost,
-	HttpException,
+	HttpException
 } from '@nestjs/common';
 
 @Catch()
@@ -16,7 +16,7 @@ export class GlobalExceptorFilter implements ExceptionFilter {
 		response.status(statusCode).json({
 			statusCode,
 			timestamp: new Date().toISOString(),
-			path: request.url,
+			path: request.url
 		});
 	}
 }

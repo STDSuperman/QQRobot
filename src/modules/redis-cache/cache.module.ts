@@ -14,11 +14,11 @@ const envConfig: EnvConfig = getEnvConfig(path.resolve(process.cwd(), '.env'));
 				store: redisStore,
 				host: envConfig.SERVER_HOST,
 				port: UserConfig.REDIS_PORT,
-				ttl: UserConfig.CACHE_TTL,
-			}),
-		}),
+				ttl: UserConfig.CACHE_TTL
+			})
+		})
 	],
 	providers: [CacheService],
-	exports: [CacheService],
+	exports: [CacheService]
 })
 export default class RedisCacheModule {}

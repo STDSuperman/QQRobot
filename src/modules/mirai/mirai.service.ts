@@ -11,7 +11,7 @@ export class MiraiService {
 		private http: HttpService,
 		private configService: ConfigService,
 		private userService: UserService,
-		private logger: LoggerService,
+		private logger: LoggerService
 	) {
 		this.init();
 	}
@@ -26,14 +26,14 @@ export class MiraiService {
 			name: 'login',
 			alias: ['lg', 'SignIn'],
 			description: '登录指令',
-			usage: '用于进行登录操作',
+			usage: '用于进行登录操作'
 		};
 		this.http
 			.post('/command/register', commandRegisterPayload)
 			.pipe(
 				map((res) => {
 					console.log(res.data);
-				}),
+				})
 			)
 			.toPromise();
 	}
@@ -59,12 +59,12 @@ export class MiraiService {
 					}
 					this.logger.error(`get session key faild`);
 					return '';
-				}),
+				})
 			)
 			.toPromise()
 			.catch((e) => {
 				this.logger.error(
-					`get session key faild: ${e.message || JSON.stringify(e)}`,
+					`get session key faild: ${e.message || JSON.stringify(e)}`
 				);
 			});
 	}
@@ -74,7 +74,7 @@ export class MiraiService {
 		return this.http
 			.post('/verify', {
 				sessionKey,
-				qq: this.configService.get('QQAccount'),
+				qq: this.configService.get('QQAccount')
 			})
 			.toPromise()
 			.then(async (res) => {
@@ -91,7 +91,7 @@ export class MiraiService {
 				this.logger.error(
 					`verify session key faild: ${
 						e.message || JSON.stringify(e)
-					}`,
+					}`
 				);
 				return false;
 			});

@@ -8,6 +8,6 @@ import { TianXingMessageService } from '@modules/bot-message/tianxing.service';
 
 @Module({
 	imports: [BotSendModule, UserModule, TianModule, CommonModule],
-	providers: [FriendMessageService, TianXingMessageService],
+	providers: [FriendMessageService, TianXingMessageService]
 })
 export default class FriendMessageHandlerModule {}

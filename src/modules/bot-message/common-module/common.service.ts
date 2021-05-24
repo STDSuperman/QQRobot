@@ -4,7 +4,7 @@ import { UserService } from '@modules/user/user.service';
 import { ConfigService } from '@modules/config/config.service';
 import {
 	GroupChatMessage,
-	Group,
+	Group
 } from '@modules/bot-message/group-message-handler/interface/chat.interface';
 import { FriendMessage } from '@modules/bot-message/friend-message-handler/friend.interface';
 import { MessageChainItemType } from '@modules/bot-message/interface/message.interface';
@@ -19,10 +19,10 @@ export class CommonService {
 	constructor(
 		private readonly botSendService: BotSendService,
 		private userService: UserService,
-		private configService: ConfigService,
+		private configService: ConfigService
 	) {
 		this.connectionGroupList = this.configService.get(
-			'CONNECTION_GROUP_LIST',
+			'CONNECTION_GROUP_LIST'
 		);
 	}
 
@@ -36,7 +36,7 @@ export class CommonService {
 	checkAtRobotAndInclueKey(
 		message: GroupChatMessage | FriendMessage,
 		keyword: string,
-		isFriendMessage = false,
+		isFriendMessage = false
 	) {
 		// 如果是好友消息则无需艾特，直接置为true
 		let isAtMine = isFriendMessage;
@@ -59,14 +59,14 @@ export class CommonService {
 		});
 		return {
 			checkRes: isAtMine && isMatchKeyword,
-			otherAtMember,
+			otherAtMember
 		};
 	}
 
 	// 批量发送消息给设定的群列表
 	async sendMessageToGroupList(
 		message: GroupChatMessage,
-		isIncludeCurrent = false,
+		isIncludeCurrent = false
 	): Promise<void> {
 		const targetGroupList = isIncludeCurrent
 			? this.connectionGroupList
@@ -74,10 +74,10 @@ export class CommonService {
 		targetGroupList.forEach(async (id) => {
 			this.botSendService.sendGroupMessage({
 				sessionKey: await this.configService.getRedisConfig(
-					'sessionKey',
+					'sessionKey'
 				),
 				target: id,
-				messageChain: message.messageChain,
+				messageChain: message.messageChain
 			});
 		});
 	}
@@ -96,7 +96,7 @@ export class CommonService {
 			(pre: Array<number>, cur: number) => {
 				return pre.concat(cur === id ? [] : cur);
 			},
-			[],
+			[]
 		);
 		this.cacheOtherConnectionGroup[id] = result;
 		return result;
@@ -106,7 +106,7 @@ export class CommonService {
 		const sendFriendMessagePayload: SendFriendMessage = {
 			sessionKey: await this.configService.getRedisConfig('sessionKey'),
 			target: message.sender.id,
-			messageChain: [{ type: MessageChainItemType.Plain, text }],
+			messageChain: [{ type: MessageChainItemType.Plain, text }]
 		};
 		this.botSendService.sendFriendMessage(sendFriendMessagePayload);
 	}

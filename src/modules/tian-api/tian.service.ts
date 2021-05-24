@@ -9,7 +9,7 @@ export class TianService {
 
 	constructor(
 		private http: HttpService,
-		private configService: ConfigService,
+		private configService: ConfigService
 	) {
 		this.tianApiKey = this.configService.get('TIAN_API_KEY');
 	}
@@ -25,7 +25,7 @@ export class TianService {
 						return data?.newslist[0]?.content;
 					}
 					return '';
-				}),
+				})
 			)
 			.toPromise();
 	}
@@ -41,7 +41,7 @@ export class TianService {
 						return data?.newslist[0]?.content;
 					}
 					return '';
-				}),
+				})
 			)
 			.toPromise();
 	}

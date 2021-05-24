@@ -2,7 +2,7 @@ import {
 	WebSocketGateway,
 	WebSocketServer,
 	SubscribeMessage,
-	MessageBody,
+	MessageBody
 } from '@nestjs/websockets';
 import { OnModuleInit } from '@nestjs/common';
 import * as ws from 'ws';
@@ -16,7 +16,7 @@ export class WsGateway implements OnModuleInit {
 		private readonly miraiService: MiraiService,
 		private readonly configService: ConfigService,
 		private readonly eventEmitter: EventEmitter2,
-		private readonly logger: LoggerService,
+		private readonly logger: LoggerService
 	) {}
 
 	@WebSocketServer()
@@ -28,10 +28,10 @@ export class WsGateway implements OnModuleInit {
 		const sessionKey = await this.miraiService.getSessionKey();
 		this.clientServer = new ws(
 			`ws://${this.configService.get(
-				'SERVER_HOST',
+				'SERVER_HOST'
 			)}:${this.configService.get(
-				'BOT_SERVER_PORT',
-			)}/message?sessionKey=${sessionKey}`,
+				'BOT_SERVER_PORT'
+			)}/message?sessionKey=${sessionKey}`
 		);
 		this.clientServer.on('open', () => {
 			console.log('ws connection');
@@ -47,7 +47,7 @@ export class WsGateway implements OnModuleInit {
 		this.clientServer.on('message', (botMessage = '') => {
 			this.eventEmitter.emit(
 				'bot.message',
-				JSON.parse(botMessage as string),
+				JSON.parse(botMessage as string)
 			);
 		});
 	}

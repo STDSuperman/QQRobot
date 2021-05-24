@@ -21,7 +21,7 @@ export class VoteKickService {
 		private readonly botSendService: BotSendService,
 		private configService: ConfigService,
 		private userService: UserService,
-		private commonService: CommonService,
+		private commonService: CommonService
 	) {}
 
 	handler = (message: GroupChatMessage) => {
@@ -33,22 +33,22 @@ export class VoteKickService {
 		const roomId = message?.sender?.group?.id;
 		const {
 			checkRes,
-			otherAtMember,
+			otherAtMember
 		} = this.commonService.checkAtRobotAndInclueKey(message, '投票踢人');
 		if (checkRes) {
 			// 检测投票踢人功能开关状态
 			if (!(await this.configService.getRedisConfig('voteKickStatus'))) {
 				this.botSendService.sendGroupMessage({
 					sessionKey: await this.configService.getRedisConfig(
-						'sessionKey',
+						'sessionKey'
 					),
 					target: roomId,
 					messageChain: [
 						{
 							type: MessageChainItemType.Plain,
-							text: `(｀▽′)ψ  投票踢人功能当前暂未开启，请联系管理员开启  (｀▽′)ψ`,
-						},
-					],
+							text: `(｀▽′)ψ  投票踢人功能当前暂未开启，请联系管理员开启  (｀▽′)ψ`
+						}
+					]
 				});
 				return;
 			}
@@ -65,13 +65,13 @@ export class VoteKickService {
 	async handleVoteKick(
 		roomId: number,
 		voteKickId: number,
-		otherAtMember: Array<number>,
+		otherAtMember: Array<number>
 	) {
 		const targetMember = otherAtMember[0];
 		const isVoted = this.checkUserIsVoted(targetMember, voteKickId);
 		const currentMemberVotes = await this.getMemberVotes(
 			targetMember,
-			voteKickId,
+			voteKickId
 		);
 		const username = await this.getUserName(targetMember, roomId);
 		let messageChain = [];
@@ -80,22 +80,22 @@ export class VoteKickService {
 			messageChain = [
 				{
 					type: MessageChainItemType.Plain,
-					text: `🤖用户 👉${voteUserName}👈  已投票，请勿重复投票`,
-				},
+					text: `🤖用户 👉${voteUserName}👈  已投票，请勿重复投票`
+				}
 			];
 		} else if (otherAtMember.length <= 0) {
 			messageChain = [
 				{
 					type: MessageChainItemType.Plain,
-					text: '未检测到投票对象！',
-				},
+					text: '未检测到投票对象！'
+				}
 			];
 		} else if (currentMemberVotes < 3) {
 			let statusText = '进行中';
 			this.saveVotedUser(targetMember, voteKickId);
 			if (!this.inVoteKickProgressList.includes(targetMember)) {
 				this.inVoteKickIdTimerMap[targetMember] = this.setVoteKickTime(
-					this.inVoteKickProgressList.push(targetMember) - 1,
+					this.inVoteKickProgressList.push(targetMember) - 1
 				);
 				statusText = '开启';
 			}
@@ -103,22 +103,22 @@ export class VoteKickService {
 				{
 					type: MessageChainItemType.Plain,
 					text: `🤖投票踢人流程${statusText}🤖\n\n⚠️ 规则：请艾特群管机器人并艾特需要投票移出群聊的对象，同时输入指令 📌投票踢人📌 即可进行投票\n\n⚠️ 被投对象超过3票将被移出群聊\n\n⚠️ 投票时长为5分钟，若未达到足够票数将取消本次流程，请谨慎使用该功能\n\n⚠️同一用户重复投票无效\n\n⚠️ 当前投票对象：${username}\n⚠️ 当前票数：${currentMemberVotes}
-                `,
-				},
+                `
+				}
 			];
 		} else {
 			messageChain = [
 				{
 					type: MessageChainItemType.Plain,
-					text: `🤖用户 👉${username}👈  投票结果🤖\n\n⚠️最终票数：${currentMemberVotes}\n\n⚠️已禁言，即将被移出群聊`,
-				},
+					text: `🤖用户 👉${username}👈  投票结果🤖\n\n⚠️最终票数：${currentMemberVotes}\n\n⚠️已禁言，即将被移出群聊`
+				}
 			];
 			// 清理流程中账号与计时器和计数
 			this.inVoteKickProgressList.splice(
 				this.inVoteKickProgressList.findIndex(
-					(item) => item === targetMember,
+					(item) => item === targetMember
 				),
-				1,
+				1
 			);
 			clearTimeout(this.inVoteKickIdTimerMap[targetMember]);
 			this.configService.setRedisConfig(targetMember, 0);
@@ -129,7 +129,7 @@ export class VoteKickService {
 		this.botSendService.sendGroupMessage({
 			sessionKey: await this.configService.getRedisConfig('sessionKey'),
 			target: roomId,
-			messageChain,
+			messageChain
 		});
 	}
 
@@ -137,7 +137,7 @@ export class VoteKickService {
 	async getUserName(userId, roomId): Promise<string> {
 		const targetMemberInfo = await this.commonService.getUserInfo(
 			userId,
-			roomId,
+			roomId
 		);
 		const username =
 			targetMemberInfo?.specialTitle ||
@@ -169,7 +169,7 @@ export class VoteKickService {
 		const result = await this.userService.kickMember(
 			memberId,
 			roomId,
-			'您被投票移出群聊',
+			'您被投票移出群聊'
 		);
 		return result;
 	}
@@ -177,7 +177,7 @@ export class VoteKickService {
 	// 计票
 	async getMemberVotes(
 		memberId: number,
-		voteKickId: number,
+		voteKickId: number
 	): Promise<number> {
 		let current = this.memberVotesMap[memberId] || 0;
 		if (this.currentVotedMemberMap[memberId]?.includes(voteKickId))

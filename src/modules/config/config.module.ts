@@ -4,6 +4,6 @@ import RedisCacheModule from '@modules/redis-cache/cache.module';
 @Module({
 	imports: [RedisCacheModule],
 	providers: [ConfigService],
-	exports: [ConfigService],
+	exports: [ConfigService]
 })
 export default class ConfigModule {}

@@ -13,7 +13,7 @@ import {
 	MessageChainItemType,
 	MessageChainItemPlain,
 	MessageChainItem,
-	MessageChain,
+	MessageChain
 } from '@modules/bot-message/interface/message.interface';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class GroupMessageHandlerService {
 	private permissionShowMap = {
 		OWNER: '群主',
 		MEMBER: '群员',
-		ADMINISTRATOR: '管理员',
+		ADMINISTRATOR: '管理员'
 	};
 	private connectionGroupList: Array<number> = [];
 	private messageHandlerMap = {}; // 不同消息关键字触发的逻辑
@@ -30,14 +30,14 @@ export class GroupMessageHandlerService {
 		private configService: ConfigService,
 		private voteKickService: VoteKickService,
 		private commonService: CommonService,
-		private tianXingMessageService: TianXingMessageService,
+		private tianXingMessageService: TianXingMessageService
 	) {
 		this.connectionGroupList = this.configService.get(
-			'CONNECTION_GROUP_LIST',
+			'CONNECTION_GROUP_LIST'
 		);
 		this.messageHandlerMap = {
 			voteKickType: this.voteKickService.handler,
-			tianXingType: this.tianXingMessageService.handler,
+			tianXingType: this.tianXingMessageService.handler
 		};
 	}
 
@@ -64,7 +64,7 @@ export class GroupMessageHandlerService {
 		const senderInfo: MessageChainItem = {
 			type: MessageChainItemType.Plain,
 			// text:  `${message.sender.memberName}（来源：${message.sender.group.name}）\n------------------------------------\n`，
-			text: this.getSenderInfoText(message.sender),
+			text: this.getSenderInfoText(message.sender)
 		};
 
 		// 由于是多个群转发消息，所以回复和@不支持
@@ -89,7 +89,7 @@ export class GroupMessageHandlerService {
 
 	// 转换转发消息无法正确识别的内容
 	async transformMessageChain(
-		message: GroupChatMessage,
+		message: GroupChatMessage
 	): Promise<MessageChain> {
 		const messageChain = [...message.messageChain];
 		const result: MessageChain = [];
@@ -103,10 +103,10 @@ export class GroupMessageHandlerService {
 						(
 							await this.commonService.getUserInfo(
 								(item as any)?.targetId || item?.target,
-								message?.sender?.group.id,
+								message?.sender?.group.id
 							)
 						)?.name || '未知用户'
-					}`,
+					}`
 				};
 			}
 			result.push(item);

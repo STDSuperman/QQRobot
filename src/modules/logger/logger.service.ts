@@ -16,11 +16,11 @@ export class LoggerService extends AppLogger {
 						winston.format.colorize(),
 						winston.format.simple(),
 						winston.format.timestamp(),
-						winston.format.prettyPrint(),
-					),
-				}),
+						winston.format.prettyPrint()
+					)
+				})
 			],
-			handleExceptions: true,
+			handleExceptions: true
 		});
 	}
 
@@ -66,7 +66,7 @@ class DBTransport extends Transport {
 			this.DBInstance.pushOne('errorLogs', {
 				level,
 				message,
-				timestamp: new Date().toTimeString(),
+				timestamp: new Date().toTimeString()
 			});
 		callback();
 	}

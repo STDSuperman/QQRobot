@@ -7,10 +7,10 @@ import { ConfigService } from '../config/config.service';
 		HttpModule.registerAsync({
 			useFactory: async (configService: ConfigService) =>
 				configService.get('BotHttpConfig'),
-			inject: [ConfigService],
-		}),
+			inject: [ConfigService]
+		})
 	],
 	providers: [UserService],
-	exports: [UserService],
+	exports: [UserService]
 })
 export default class UserModule {}

@@ -6,6 +6,6 @@ import BotSendModule from '@modules/bot-send/send.module';
 
 @Module({
 	imports: [GroupMessageHanlderModule, FriendMessageModule, BotSendModule],
-	providers: [BotMessageService],
+	providers: [BotMessageService]
 })
 export default class BotMessageModule {}

@@ -15,13 +15,13 @@ export class BotMessageService {
 			case MessageType.GroupMessage:
 				this.eventEmitter.emit(
 					'bot.message.group',
-					message as GroupChatMessage,
+					message as GroupChatMessage
 				);
 				break;
 			case MessageType.FriendMessage:
 				this.eventEmitter.emit(
 					'bot.message.friend',
-					message as FriendMessage,
+					message as FriendMessage
 				);
 			default:
 				break;

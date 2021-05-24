@@ -2,7 +2,7 @@ import { Injectable, HttpService } from '@nestjs/common';
 import { map } from 'rxjs/operators';
 import {
 	SendGroupMessage,
-	SendFriendMessage,
+	SendFriendMessage
 } from './interface/send.interface';
 import { LoggerService } from '@modules/logger/logger.service';
 import { MiraiService } from '@modules/mirai/mirai.service';
@@ -12,7 +12,7 @@ export class BotSendService {
 	constructor(
 		private http: HttpService,
 		private logger: LoggerService,
-		private readonly miraiService: MiraiService,
+		private readonly miraiService: MiraiService
 	) {}
 
 	// 发送群消息
@@ -26,7 +26,7 @@ export class BotSendService {
 				const logObj = {
 					type: 'sendGroupMessage',
 					message: e.message || JSON.stringify(e),
-					payload: messageData,
+					payload: messageData
 				};
 				this.logger.error(JSON.stringify(logObj));
 				return false;
@@ -44,7 +44,7 @@ export class BotSendService {
 				const logObj = {
 					type: 'sendFriendMessage',
 					message: e.message || JSON.stringify(e),
-					payload: messageData,
+					payload: messageData
 				};
 				this.logger.error(JSON.stringify(logObj));
 				return false;

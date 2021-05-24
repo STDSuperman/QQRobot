@@ -15,13 +15,13 @@ export default {
 	CONNECTION_GROUP_LIST: [
 		704915550,
 		849247690,
-		687817188,
+		687817188
 		// 851937215
 	],
 	// 与mirai机器人服务通信的 axios 配置
 	BotHttpConfig: {
 		timeout: 5000,
 		maxRedirects: 5,
-		baseURL: BOT_BASE_URL,
-	},
+		baseURL: BOT_BASE_URL
+	}
 };
