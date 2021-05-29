@@ -31,10 +31,8 @@ export class VoteKickService {
 	// 处理艾特自己的情况
 	async handleIsAtMine(message: GroupChatMessage): Promise<void> {
 		const roomId = message?.sender?.group?.id;
-		const {
-			checkRes,
-			otherAtMember
-		} = this.commonService.checkAtRobotAndInclueKey(message, '投票踢人');
+		const { checkRes, otherAtMember } =
+			this.commonService.checkAtRobotAndInclueKey(message, '投票踢人');
 		if (checkRes) {
 			// 检测投票踢人功能开关状态
 			if (!(await this.configService.getRedisConfig('voteKickStatus'))) {

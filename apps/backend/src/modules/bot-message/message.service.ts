@@ -23,6 +23,7 @@ export class BotMessageService {
 					'bot.message.friend',
 					message as FriendMessage
 				);
+				break;
 			default:
 				break;
 		}

@@ -1,35 +1,33 @@
 {
-  "name": "qqbot-backend",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "name": "QQRobot",
+  "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
-    "pm2:start": "pm2 start --name QQBot dist/main.js",
-    "pm2:stop": "pm2 stop --name QQBot dist/main.js",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "nx": "nx",
+    "start": "nx serve",
+    "build": "nx build",
+    "test": "nx test",
+    "lint": "nx workspace-lint && nx lint",
+    "e2e": "nx e2e",
+    "affected:apps": "nx affected:apps",
+    "affected:libs": "nx affected:libs",
+    "affected:build": "nx affected:build",
+    "affected:e2e": "nx affected:e2e",
+    "affected:test": "nx affected:test",
+    "affected:lint": "nx affected:lint",
+    "affected:dep-graph": "nx affected:dep-graph",
+    "affected": "nx affected",
+    "format": "nx format:write",
+    "format:write": "nx format:write",
+    "format:check": "nx format:check",
+    "update": "nx migrate latest",
+    "workspace-generator": "nx workspace-generator",
+    "dep-graph": "nx dep-graph",
+    "help": "nx help",
     "postinstall": "husky install",
     "prepare": "husky install"
   },
-  "keywords": [
-    "TypeScript",
-    "Nest",
-    "Winston",
-    "QQRobot"
-  ],
+  "private": true,
   "dependencies": {
     "@nestjs/common": "^7.6.13",
     "@nestjs/core": "^7.6.13",
@@ -44,6 +42,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6",
+    "tslib": "^2.0.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {
@@ -52,8 +51,16 @@
     "@nestjs/cli": "^7.5.6",
     "@nestjs/schematics": "^7.2.7",
     "@nestjs/testing": "^7.6.13",
+    "@nrwl/cli": "12.3.5",
+    "@nrwl/eslint-plugin-nx": "12.3.5",
+    "@nrwl/jest": "12.3.5",
+    "@nrwl/linter": "12.3.5",
+    "@nrwl/nest": "^12.3.5",
+    "@nrwl/node": "12.3.5",
+    "@nrwl/tao": "12.3.5",
+    "@nrwl/workspace": "12.3.5",
     "@types/express": "^4.17.11",
-    "@types/jest": "^26.0.20",
+    "@types/jest": "^26.0.23",
     "@types/node": "^14.14.31",
     "@types/supertest": "^2.0.10",
     "@types/ws": "^7.4.0",
@@ -75,25 +82,5 @@
     "ts-node": "^9.1.1",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^4.1.5"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
-  },
-  "lint-staged": {
-    "*.js": "eslint --cache --fix"
   }
 }
