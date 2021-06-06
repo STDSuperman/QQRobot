@@ -97,7 +97,7 @@ export class GroupMessageHandlerService {
 			const item = messageChain.shift();
 			if (item.type === MessageChainItemType.Quote) continue;
 			if (item.type === MessageChainItemType.At) {
-				((item as unknown) as MessageChainItemPlain) = {
+				(item as unknown as MessageChainItemPlain) = {
 					type: MessageChainItemType.Plain,
 					text: `@${
 						(

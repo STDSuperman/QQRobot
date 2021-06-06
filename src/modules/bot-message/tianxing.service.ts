@@ -37,7 +37,8 @@ export class TianXingMessageService {
 			this.isFriendMessage
 		);
 		if (checkRes) {
-			const tianGouOneContent = await this.tianXingHttpService.getTiangouOne();
+			const tianGouOneContent =
+				await this.tianXingHttpService.getTiangouOne();
 			message.messageChain = [
 				{
 					type: MessageChainItemType.Plain,
@@ -64,7 +65,8 @@ export class TianXingMessageService {
 			this.isFriendMessage
 		);
 		if (checkRes) {
-			const tianRainbowFart = await this.tianXingHttpService.getRainbowFart();
+			const tianRainbowFart =
+				await this.tianXingHttpService.getRainbowFart();
 			message.messageChain = [
 				{
 					type: MessageChainItemType.Plain,
