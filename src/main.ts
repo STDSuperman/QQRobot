@@ -5,7 +5,7 @@ import { LoggerService } from '@/modules/logger/logger.service';
 import { GlobalExceptorFilter } from '@/common/filters/global-exception.filter';
 
 async function bootstrap() {
-	const app = await NestFactory.create(AppModule);
+	const app = await NestFactory.create(AppModule, { cors: true });
 	app.useWebSocketAdapter(new WsAdapter());
 	app.useLogger(app.get(LoggerService));
 	app.useGlobalFilters(new GlobalExceptorFilter());

@@ -2,6 +2,7 @@ import { Injectable, Logger as AppLogger } from '@nestjs/common';
 import * as winston from 'winston';
 import * as Transport from 'winston-transport';
 import { LowDbService, LowDBInstance } from '@modules/db/db.service';
+import * as UUID from 'uuid';
 @Injectable()
 export class LoggerService extends AppLogger {
 	private logger: winston.Logger;
@@ -43,8 +44,8 @@ export class LoggerService extends AppLogger {
 		this.logger.verbose(message);
 	}
 
-	readErrorLog() {
-		return this.lowDB.readRecentData('errorLogs', 20);
+	readErrorLog(pageNum) {
+		return this.lowDB.readRecentData('errorLogs', 20, pageNum);
 	}
 }
 
@@ -70,7 +71,8 @@ class DBTransport extends Transport {
 				level,
 				message: message,
 				dateString: new Date().toLocaleString(),
-				timestamp: new Date().getTime()
+				timestamp: new Date().getTime(),
+				id: UUID.v1()
 			});
 		callback();
 	}

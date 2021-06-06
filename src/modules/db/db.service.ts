@@ -58,7 +58,17 @@ export class LowDbService {
 		return this.db.get(key).value();
 	}
 
-	readRecentData<K extends keyof LowDBData>(key: K, num: number, sortByKey: string = 'timestamp') {
-		return this.db.get(key).sortBy(sortByKey).take(num).value();
+	readRecentData<K extends keyof LowDBData>(
+		key: K,
+		num: number,
+		pageNum = 1,
+		sortByKey = 'timestamp'
+	) {
+		return this.db
+			.get(key)
+			.slice((pageNum - 1) * num, pageNum * num)
+			.sortBy(sortByKey)
+			.take(num)
+			.value();
 	}
 }
