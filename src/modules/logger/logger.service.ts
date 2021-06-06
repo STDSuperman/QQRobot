@@ -44,7 +44,7 @@ export class LoggerService extends AppLogger {
 	}
 
 	readErrorLog() {
-		return this.lowDB.readAll('errorLogs');
+		return this.lowDB.readRecentData('errorLogs', 20);
 	}
 }
 
