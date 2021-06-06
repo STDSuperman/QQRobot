@@ -65,8 +65,8 @@ class DBTransport extends Transport {
 		level === 'error' &&
 			this.DBInstance.pushOne('errorLogs', {
 				level,
-				message,
-				timestamp: new Date().toTimeString()
+				message: JSON.parse(message),
+				timestamp: new Date().toLocaleString()
 			});
 		callback();
 	}
