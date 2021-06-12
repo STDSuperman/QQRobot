@@ -73,7 +73,7 @@ export class GroupMessageHandlerService {
 		if (
 			this.commonService.checkIsInConnectionGroup(message?.sender?.group)
 		) {
-			this.commonService.sendMessageToGroupList(message, true);
+			this.commonService.sendMessageToGroupList(message);
 		}
 	}
 
