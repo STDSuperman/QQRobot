@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as path from 'path';
-import { GlobalConfig, EnvConfig } from './config.interface';
+import { GlobalConfig, EnvConfig, RedisConfig } from './config.interface';
 import UserConfig from '../../config';
 import { CacheService } from '@modules/redis-cache/cache.service';
 import { getEnvConfig } from '@/common/utils/index';
@@ -35,11 +35,17 @@ export class ConfigService {
 		this.globalConfig[key] = value;
 	}
 
-	async getRedisConfig(key) {
+	async getRedisConfig<K extends keyof RedisConfig>(
+		key: K
+	): Promise<RedisConfig[K]> {
 		return this.redisCacheService.get(key);
 	}
 
-	async setRedisConfig(key: any, value: any): Promise<void> {
-		await this.redisCacheService.set(key, value);
+	async setRedisConfig(
+		key: any,
+		value: any,
+		ttl: number = UserConfig.CACHE_TTL
+	): Promise<void> {
+		await this.redisCacheService.set(key, value, ttl);
 	}
 }

@@ -35,7 +35,7 @@ export class WsGateway implements OnModuleInit {
 				'VERIFY_KEY'
 			)}&qq=${this.configService.get(
 				'QQAccount'
-			)}&sessionKey=${this.miraiService.getSessionKey()}`
+			)}&sessionKey=${await this.miraiService.getSessionKey()}`
 		);
 		this.clientServer.on('open', () => {
 			console.log('ws connection');
@@ -48,7 +48,7 @@ export class WsGateway implements OnModuleInit {
 			console.log(e);
 			this.logger.error(JSON.stringify(e));
 		});
-		this.clientServer.on('message', (botMessage: string) => {
+		this.clientServer.on('message', async (botMessage: string) => {
 			this.eventEmitter.emit(
 				'bot.message',
 				(JSON.parse(botMessage) as IBotMessage).data

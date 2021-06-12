@@ -20,15 +20,22 @@ export class BotSendService {
 		await this.checkSessionKey(messageData);
 		return this.http
 			.post('/sendGroupMessage', messageData)
-			.pipe(map((res) => res.data.code === 0))
+			.pipe(
+				map((res) => {
+					const data = res.data || {};
+					if (data.code === 0) return true;
+					this.logger.error(data.msg || '发送群消息异常');
+				})
+			)
 			.toPromise()
 			.catch((e) => {
+				console.log(e);
 				const logObj = {
 					type: 'sendGroupMessage',
-					message: e.message || JSON.stringify(e),
+					message: e.message || '发送群消息异常',
 					payload: messageData
 				};
-				this.logger.error(JSON.stringify(logObj));
+				this.logger.error(logObj);
 				return false;
 			});
 	}

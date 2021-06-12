@@ -2,6 +2,7 @@ import { Injectable, HttpService } from '@nestjs/common';
 import { ConfigService } from '@modules/config/config.service';
 import { map } from 'rxjs/operators';
 import { RainbowFartOrTianGouResponse } from './interface/tian.interface';
+import { LoggerService } from '@modules/logger/logger.service';
 
 @Injectable()
 export class TianService {
@@ -9,13 +10,14 @@ export class TianService {
 
 	constructor(
 		private http: HttpService,
-		private configService: ConfigService
+		private configService: ConfigService,
+		private readonly logger: LoggerService
 	) {
 		this.tianApiKey = this.configService.get('TIAN_API_KEY');
 	}
 
 	// 随机获取一条舔狗日记
-	getTiangouOne(): Promise<string> {
+	getTianGouOne(): Promise<string> {
 		return this.http
 			.get(`/txapi/tiangou/index?key=${this.tianApiKey}`)
 			.pipe(
@@ -27,7 +29,11 @@ export class TianService {
 					return '';
 				})
 			)
-			.toPromise();
+			.toPromise()
+			.catch((e) => {
+				this.logger.error(e.message || '获取舔狗日记失败');
+				return '获取失败';
+			});
 	}
 
 	// 彩虹屁
@@ -43,6 +49,10 @@ export class TianService {
 					return '';
 				})
 			)
-			.toPromise();
+			.toPromise()
+			.catch((e) => {
+				this.logger.error(e.message || '获取彩虹屁失败');
+				return '获取失败';
+			});
 	}
 }

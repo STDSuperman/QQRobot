@@ -30,7 +30,6 @@ export class FriendMessageService implements OnModuleInit {
 	}
 
 	handleFriendChatMessage(message: FriendMessage) {
-		console.log(message);
 		this.handlerVoteSwitch(message);
 		this.messageChainResolve(message);
 	}

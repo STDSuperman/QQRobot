@@ -11,7 +11,6 @@ export class BotMessageService {
 
 	@OnEvent('bot.message')
 	handleBotMessage(message: any = {}): void {
-		console.log(message);
 		switch (message.type) {
 			case MessageType.GroupMessage:
 				this.eventEmitter.emit(
