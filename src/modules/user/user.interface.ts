@@ -18,7 +18,7 @@ export interface KickMemberPayload {
 }
 type LoginPayloadArgs = [number, string];
 export interface LoginPayload {
-	authKey: string;
+	verifyKey: string;
 	name: string;
 	args: LoginPayloadArgs;
 }

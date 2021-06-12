@@ -1,5 +1,5 @@
 export interface CommandRegisterPayload {
-	authKey: string;
+	verifyKey: string;
 	name: string;
 	alias: [string, string];
 	description: string;

@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 export interface GlobalConfig {
-	AUTH_KEY: string;
+	VERIFY_KEY: string;
 	BOT_BASE_URL: string;
 	BOT_SERVER_PORT: number;
 	CACHE_TTL: number;

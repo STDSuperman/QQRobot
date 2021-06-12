@@ -9,11 +9,12 @@ import * as ws from 'ws';
 import { ConfigService } from '../config/config.service';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { LoggerService } from '@modules/logger/logger.service';
+import { IBotMessage } from '@modules/ws-gateway/ws.interface';
 import { MiraiService } from '@modules/mirai/mirai.service';
 @WebSocketGateway()
 export class WsGateway implements OnModuleInit {
 	constructor(
-		private readonly miraiService: MiraiService,
+		private miraiService: MiraiService,
 		private readonly configService: ConfigService,
 		private readonly eventEmitter: EventEmitter2,
 		private readonly logger: LoggerService
@@ -25,13 +26,16 @@ export class WsGateway implements OnModuleInit {
 	private clientServer: ws;
 
 	async onModuleInit() {
-		const sessionKey = await this.miraiService.getSessionKey();
 		this.clientServer = new ws(
 			`ws://${this.configService.get(
 				'SERVER_HOST'
 			)}:${this.configService.get(
 				'BOT_SERVER_PORT'
-			)}/message?sessionKey=${sessionKey}`
+			)}/message?verifyKey=${this.configService.get(
+				'VERIFY_KEY'
+			)}&qq=${this.configService.get(
+				'QQAccount'
+			)}&sessionKey=${this.miraiService.getSessionKey()}`
 		);
 		this.clientServer.on('open', () => {
 			console.log('ws connection');
@@ -44,10 +48,10 @@ export class WsGateway implements OnModuleInit {
 			console.log(e);
 			this.logger.error(JSON.stringify(e));
 		});
-		this.clientServer.on('message', (botMessage = '') => {
+		this.clientServer.on('message', (botMessage: string) => {
 			this.eventEmitter.emit(
 				'bot.message',
-				JSON.parse(botMessage as string)
+				(JSON.parse(botMessage) as IBotMessage).data
 			);
 		});
 	}

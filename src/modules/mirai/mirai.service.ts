@@ -22,7 +22,7 @@ export class MiraiService {
 
 	async registerCommand() {
 		const commandRegisterPayload: CommandRegisterPayload = {
-			authKey: this.configService.get('AUTH_KEY'),
+			verifyKey: this.configService.get('VERIFY_KEY'),
 			name: 'login',
 			alias: ['lg', 'SignIn'],
 			description: '登录指令',
@@ -51,7 +51,9 @@ export class MiraiService {
 	}
 	async fetchSessionKey(): Promise<string> {
 		return this.http
-			.post('/auth', { authKey: this.configService.get('AUTH_KEY') })
+			.post('/verify', {
+				verifyKey: this.configService.get('VERIFY_KEY')
+			})
 			.pipe(
 				map((res) => {
 					if (res.data.code === 0) {
@@ -72,7 +74,7 @@ export class MiraiService {
 	async verify(sessionKey: string): Promise<boolean> {
 		if (!sessionKey) return false;
 		return this.http
-			.post('/verify', {
+			.post('/bind', {
 				sessionKey,
 				qq: this.configService.get('QQAccount')
 			})

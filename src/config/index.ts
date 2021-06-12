@@ -1,8 +1,8 @@
 const BOT_BASE_URL = ''; // 后续会从env读取赋值
 
 export default {
-	// mirai-api-http 配置的 authKey 内容
-	AUTH_KEY: '1234567890',
+	// mirai-api-http 配置的 verifyKey 内容
+	VERIFY_KEY: '1234567890',
 	// 你登录mirai QQ 机器人的服务器地址，从根目录下.env文件中获取
 	BOT_BASE_URL,
 	// mirai-api-http 配置的 port 内容
