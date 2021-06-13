@@ -35,7 +35,7 @@ export class ConfigService {
 		this.globalConfig[key] = value;
 	}
 
-	async getRedisConfig(key) {
+	async getRedisConfig(key): Promise<any> {
 		return this.redisCacheService.get(key);
 	}
 
