@@ -9,6 +9,8 @@ async function bootstrap() {
 	app.useWebSocketAdapter(new WsAdapter());
 	app.useLogger(app.get(LoggerService));
 	app.useGlobalFilters(new GlobalExceptorFilter());
-	await app.listen(3000);
+	await app.listen(3000, () => {
+		console.log('Service listening in 3000');
+	});
 }
 bootstrap();
