@@ -34,7 +34,7 @@ export class ConfigService {
 	set(key: string, value: any): void {
 		this.globalConfig[key] = value;
 	}
-
+  
 	async getRedisConfig<K extends keyof RedisConfig>(
 		key: K
 	): Promise<RedisConfig[K]> {

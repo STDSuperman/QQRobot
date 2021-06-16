@@ -22,7 +22,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "postinstall": "husky install",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "commit": "git add -A && git-cz"
   },
   "keywords": [
     "TypeScript",
@@ -60,7 +61,10 @@
     "@types/ws": "^7.4.0",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
+    "commitizen": "^4.2.4",
     "commitlint-config-cz": "^0.13.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^6.3.0",
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
@@ -96,5 +100,10 @@
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    }
   }
 }
