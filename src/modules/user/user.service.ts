@@ -19,7 +19,7 @@ export class UserService {
 	// 机器人登录
 	async login() {
 		const loginPayload: LoginPayload = {
-			authKey: this.configService.get('AUTH_KEY'),
+			verifyKey: this.configService.get('VERIFY_KEY'),
 			name: 'login',
 			args: [
 				+(await this.configService.get('QQAccount')),

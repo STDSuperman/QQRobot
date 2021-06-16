@@ -37,7 +37,7 @@ export class TianXingMessageService {
 			this.isFriendMessage
 		);
 		if (checkRes) {
-			const tianGouOneContent = await this.tianXingHttpService.getTiangouOne();
+			const tianGouOneContent = await this.tianXingHttpService.getTianGouOne();
 			message.messageChain = [
 				{
 					type: MessageChainItemType.Plain,

@@ -25,23 +25,27 @@ export class LoggerService extends AppLogger {
 		});
 	}
 
-	warn(message: string): void {
-		this.logger.warn(message);
+	warn(message: string | Record<string, unknown>): void {
+		this.logger.warn(this.checkAndFormatData(message));
 	}
 
-	error(message: string): void {
-		this.logger.error(message);
+	error(message: string | Record<string, unknown>): void {
+		this.logger.error(this.checkAndFormatData(message));
 	}
 
-	log(message: string): void {
-		this.logger.log('info', message);
+	log(message: string | Record<string, unknown>): void {
+		this.logger.log('info', this.checkAndFormatData(message));
 	}
 
-	debug(message: string): void {
-		this.logger.debug(message);
+	debug(message: string | Record<string, unknown>): void {
+		this.logger.debug(this.checkAndFormatData(message));
 	}
 	verbose(message: any): void {
-		this.logger.verbose(message);
+		this.logger.verbose(this.checkAndFormatData(message));
+	}
+
+	checkAndFormatData(message): string {
+		return typeof message === 'string' ? message : JSON.stringify(message);
 	}
 
 	readErrorLog(pageNum) {

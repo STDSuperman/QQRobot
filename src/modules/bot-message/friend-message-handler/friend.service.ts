@@ -18,11 +18,7 @@ export class FriendMessageService implements OnModuleInit {
 		private configService: ConfigService,
 		private botService: BotSendService,
 		private tianXingMessageService: TianXingMessageService
-	) {
-		this.messageHandlerMap = {
-			tianXingType: this.tianXingMessageService.handler
-		};
-	}
+	) {}
 
 	onModuleInit() {
 		this.configService.setRedisConfig('voteKickStatus', true); // 投票踢人默认开启

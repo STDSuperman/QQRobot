@@ -25,7 +25,9 @@ export class WsService {
 	}
 	async getAuth(): Promise<string> {
 		return this.http
-			.post('/auth', { authKey: this.configService.get('AUTH_KEY') })
+			.post('/verify', {
+				verifyKey: this.configService.get('VERIFY_KEY')
+			})
 			.pipe(
 				map((res) => {
 					if (res.data.code === 0) {
@@ -38,7 +40,10 @@ export class WsService {
 			.toPromise()
 			.catch((e) => {
 				this.logger.error(
-					`get session key faild: ${e.message || JSON.stringify(e)}`
+					`get session key faild: ${
+						e.message ||
+						JSON.stringify(e) + this.configService.get('VERIFY_KEY')
+					}`
 				);
 			});
 	}
@@ -46,7 +51,7 @@ export class WsService {
 	async verify(sessionKey: string): Promise<boolean> {
 		if (!sessionKey) return false;
 		return this.http
-			.post('/verify', {
+			.post('/bind', {
 				sessionKey,
 				qq: this.configService.get('QQAccount')
 			})
