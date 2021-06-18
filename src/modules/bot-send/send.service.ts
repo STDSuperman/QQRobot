@@ -29,7 +29,6 @@ export class BotSendService {
 			)
 			.toPromise()
 			.catch((e) => {
-				console.log(e);
 				const logObj = {
 					type: 'sendGroupMessage',
 					message: e.message || '发送群消息异常',
