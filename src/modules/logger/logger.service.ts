@@ -48,8 +48,12 @@ export class LoggerService extends AppLogger {
 		return typeof message === 'string' ? message : JSON.stringify(message);
 	}
 
-	readErrorLog(pageNum) {
-		return this.lowDB.readRecentData('errorLogs', 20, pageNum);
+	readErrorLog(pageNum, pageSize = 20, sort) {
+		return this.lowDB.readRecentData('errorLogs', pageSize, pageNum, sort);
+	}
+
+	readErrorLogSize() {
+		return this.lowDB.getDataSize('errorLogs');
 	}
 }
 

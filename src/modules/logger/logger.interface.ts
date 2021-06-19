@@ -5,7 +5,17 @@ export interface IErrorLogItem {
 	timestamp: number;
 }
 
+export interface IErrorLogResponseData {
+	results: IErrorLogItem[];
+	total: number;
+}
+
 export interface IErrorLogResponse {
 	code: number;
-	data: IErrorLogItem[];
+	data: IErrorLogResponseData;
+}
+
+export enum ESortType {
+	ascending = 1,
+	descending = 2
 }

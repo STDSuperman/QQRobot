@@ -3,7 +3,7 @@ import * as low from 'lowdb';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as FileSync from 'lowdb/adapters/FileSync';
-
+import { ESortType } from '@/modules/logger/logger.interface';
 interface ErrorItem {
 	lever: 'info' | 'warn' | 'error';
 	message: string;
@@ -60,15 +60,21 @@ export class LowDbService {
 
 	readRecentData<K extends keyof LowDBData>(
 		key: K,
-		num: number,
+		num = 20,
 		pageNum = 1,
-		sortByKey = 'timestamp'
+		sortByKey = 'timestamp',
+		sort = ESortType.descending
 	) {
-		return this.db
-			.get(key)
+		let result = this.db.get(key).sortBy(sortByKey);
+
+		if (sort === 2) result = result.reverse();
+		return result
 			.slice((pageNum - 1) * num, pageNum * num)
-			.sortBy(sortByKey)
 			.take(num)
 			.value();
+	}
+
+	getDataSize(key: string) {
+		return this.db.get(key).size().value();
 	}
 }

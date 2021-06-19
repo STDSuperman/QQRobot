@@ -1,15 +1,29 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { LoggerService } from './logger.service';
-import { IErrorLogResponse } from '@/modules/logger/logger.interface';
+import {
+	IErrorLogResponse,
+	ESortType
+} from '@/modules/logger/logger.interface';
 @Controller('log')
 export class LoggerController {
 	constructor(private loggerService: LoggerService) {}
 
 	@Get('/error')
-	readErrorLog(@Query('pageNum') pageNum = 1): IErrorLogResponse {
+	async readErrorLog(
+		@Query('pageNum') pageNum = 1,
+		@Query('pageSize') pageSize = 20,
+		@Query('sort') sort = ESortType.descending
+	): Promise<IErrorLogResponse> {
 		return {
 			code: 0,
-			data: this.loggerService.readErrorLog(pageNum)
+			data: {
+				results: await this.loggerService.readErrorLog(
+					pageNum,
+					pageSize,
+					sort
+				),
+				total: await this.loggerService.readErrorLogSize()
+			}
 		};
 	}
 
