@@ -49,7 +49,7 @@ _✨ 基于 [Mirai](https://github.com/mamoe/mirai) + [mirai-api-http](https://g
 
 #### 安装 Mirai 环境
 
-> 当前项目依赖 `mirai-api-http` 版本为 1.x
+> 当前项目依赖 `mirai-api-http` 版本为 2.x
 
 1. 安装`Mirai Console Loader`：[相关安装地址](https://github.com/iTXTech/mirai-console-loader)。
 
@@ -61,6 +61,22 @@ _✨ 基于 [Mirai](https://github.com/mamoe/mirai) + [mirai-api-http](https://g
 ```shell
 ./mcl --update-package net.mamoe:mirai-api-http --channel stable --type plugin
 ```
+
+***重要 !!!***
+==========>
+
+如果上面步骤2安装的`mirai-api-http`版本最终是`1.x`，那么这里你可以在当前目录下把`plugins`里内容都删掉，然后手动下载这个包[mirai-api-http@2.x](https://github.com/project-mirai/mirai-api-http/releases/tag/v2.0.2)，放置到`plugins`目录下。
+
+然后记得在终端里执行
+```shell
+./mcl --disable-script updater
+```
+
+这个是用来禁用`mcl`的自动更新的，因为目前观察来看每次启动会自动下载`1.x`版本，导致启动出现问题。
+
+> 如果这个问题已经修复了就当我没说。。。。
+
+==========>
 
 执行完毕之后你可以通过执行`./mcl`命令直接启动，看`mirai`环境是否正常启动成功。
 
@@ -81,34 +97,44 @@ _✨ 基于 [Mirai](https://github.com/mamoe/mirai) + [mirai-api-http](https://g
 ##### 配置文件示例
 > 笔者的文件目录为：`config\net.mamoe.mirai-api-http\setting.yml`
 ```yml
-cors: 
-  - '*'
-host: 0.0.0.0
-port: 9999
-authKey: 000000000
+## 配置文件中的值，全为默认值
+
+## 启用的 adapter, 内置有 http, ws, reverse-ws, webhook
+adapters:
+  - http
+  - ws
+
+## 是否开启认证流程, 若为 true 则建立连接时需要验证 verifyKey
+## 建议公网连接时开启
+enableVerify: true
+verifyKey: 1234567890
+
+## 开启一些调式信息
+debug: false
+
+## 是否开启单 session 模式, 若为 true，则自动创建 session 绑定 console 中登录的 bot
+## 开启后，接口中任何 sessionKey 不需要传递参数
+## 若 console 中有多个 bot 登录，则行为未定义
+## 确保 console 中只有一个 bot 登陆时启用
+singleMode: false
+
+## 历史消息的缓存大小
+## 同时，也是 http adapter 的消息队列容量
 cacheSize: 4096
-enableWebsocket: true
-report: 
-  enable: false
-  groupMessage: 
-    report: true
-  friendMessage: 
-    report: true
-  tempMessage: 
-    report: true
-  eventMessage: 
-    report: true
-  destinations: []
-  extraHeaders: {}
 
-heartbeat: 
-  enable: true
-  delay: 1000
-  period: 15000
-  destinations: []
-  extraBody: {}
-
-  extraHeaders: {}
+## adapter 的单独配置，键名与 adapters 项配置相同
+adapterSettings:
+  ## 详情看 http adapter 使用说明 配置
+  http:
+    host: localhost
+    port: 9999
+    cors: [*]
+  
+  ## 详情看 websocket adapter 使用说明 配置
+  ws:
+    host: localhost
+    port: 9999
+    reservedSyncId: -1
 
 ```
 
