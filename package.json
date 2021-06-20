@@ -13,7 +13,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "pm2:start": "npm run prisma:push && pm2 start --name QQRobot dist/main.js",
+    "pm2:start": "npm run prisma:gen && npm run prisma:push && pm2 start --name QQRobot dist/main.js",
     "pm2:stop": "pm2 stop --name QQRobot dist/main.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
@@ -24,7 +24,8 @@
     "postinstall": "husky install",
     "prepare": "husky install",
     "commit": "git add -A && git-cz",
-    "prisma:push": "prisma2 db push --accept-data-loss"
+    "prisma:push": "prisma2 db push --accept-data-loss",
+    "prisma:gen": "prisma2 generate"
   },
   "keywords": [
     "TypeScript",

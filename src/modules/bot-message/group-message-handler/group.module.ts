@@ -8,7 +8,13 @@ import { TianXingMessageService } from '@modules/bot-message/tianxing.service';
 import TianModule from '@modules/tian-api/tian.module';
 import GroupAnalysisModule from '@modules/data-analysis/analysis.module';
 @Module({
-	imports: [BotSendModule, UserModule, TianModule, CommonModule, GroupAnalysisModule],
+	imports: [
+		BotSendModule,
+		UserModule,
+		TianModule,
+		CommonModule,
+		GroupAnalysisModule
+	],
 	providers: [
 		GroupMessageHandlerService,
 		VoteKickService,
