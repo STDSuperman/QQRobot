@@ -36,11 +36,14 @@ _✨ 基于 [Mirai](https://github.com/mamoe/mirai) + [mirai-api-http](https://g
 - [x] 接入天行API，通过检测关键字实现诸如获取 *舔狗日记* 、 *彩虹屁*（一段文字）等
 功能
 - [x] 支持输入关键字实现群员投票踢人能力
+- [x] 支持关键字搜索音乐能力
 
 > 现已迁移到`mirai-api-http`的`2.x`版本，`1.x`版本[传送门](https://github.com/STDSuperman/QQRobot/tree/master-v1)
 
 ## ✨预览
 <img src="https://blog-images-1257398419.cos.ap-nanjing.myqcloud.com/github/robot-preview-1.png" style="border: 1px solid #eee;padding: 5px;border-radius: 7px;box-shadow: 0 0 10px 1px #eee">
+
+<img src="https://blog-images-1257398419.cos.ap-nanjing.myqcloud.com/github/music-support.png" style="border: 1px solid #eee;padding: 5px;border-radius: 7px;box-shadow: 0 0 10px 1px #eee">
 
 ## 🚀 开发手册
 
@@ -172,7 +175,7 @@ SERVER_HOST=xxx
 | 配置项       | 相关介绍                                                     |                                               |
 | ------------ | ------------------------------------------------------------ | --------------------------------------------- |
 | TIAN_API_KEY | 天行API申请的`KEY`，需要你在[官网](https://www.tianapi.com/)进行申请，与此同时，你还需要申请[舔狗日记](https://www.tianapi.com/apiview/180)、[彩虹屁](https://www.tianapi.com/apiview/181)等天行`API`应用，都是免费的。 | 必填。否则无法使用相关`API`                   |
-| QQAccount    | 你登录的用作机器人的`QQ`账号                                 | 可选。（目前使用该配置的功能`mirai`暂未支持） |
+| QQAccount    | 你登录的用作机器人的`QQ`账号                                 | 必填。 |
 | QQPassword   | 你登录的机器人密码                                           | 可选。（目前使用该配置的功能`mirai`暂未支持） |
 | SERVER_HOST  | 你登录的`mirai`服务地址（如果本机就`127.0.0.1`或`localhost`即可） | 必填。                                        |
 
