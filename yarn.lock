@@ -922,6 +922,18 @@
   dependencies:
     debug "^4.3.1"
 
+"@prisma/client@^2.25.0":
+  version "2.25.0"
+  resolved "https://r.cnpmjs.org/@prisma/client/download/@prisma/client-2.25.0.tgz#a81cdf93ce93128eb35298cf8935480f3da6cca3"
+  integrity sha1-qBzfk86TEo6zUpjPiTVIDz2mzKM=
+  dependencies:
+    "@prisma/engines-version" "2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922"
+
+"@prisma/engines-version@2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922":
+  version "2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922"
+  resolved "https://r.cnpmjs.org/@prisma/engines-version/download/@prisma/engines-version-2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922.tgz#b353576a97d0c1952fd4f4201189e845aaafbea8"
+  integrity sha1-s1NXapfQwZUv1PQgEYnoRaqvvqg=
+
 "@prisma/engines@2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922":
   version "2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922"
   resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-2.25.0-36.c838e79f39885bc8e1611849b1eb28b5bb5bc922.tgz#68d7850d311df6d017e1b878adb19ec21483bcf0"

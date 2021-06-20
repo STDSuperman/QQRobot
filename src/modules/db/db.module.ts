@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { LowDbService } from './db.service';
+import { LowDbService, MysqlDBService } from './db.service';
 
 @Module({
-	providers: [LowDbService],
-	exports: [LowDbService]
+	providers: [LowDbService, MysqlDBService],
+	exports: [LowDbService, MysqlDBService]
 })
 export default class DbModule {}

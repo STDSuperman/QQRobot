@@ -1,0 +1,21 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model GroupChatMessage {
+    id BigInt @id @default(autoincrement())
+    sendTimestamp  BigInt
+    groupName  String
+    groupId BigInt
+    permission String
+    memberName String
+    memberId BigInt
+}

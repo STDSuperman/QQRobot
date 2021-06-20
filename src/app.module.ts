@@ -9,6 +9,7 @@ import UserModule from './modules/user/user.module';
 import MiraiModule from './modules/mirai/mirai.module';
 import GlobalModule from '@/modules/global/global.module';
 import DbModule from '@/modules/db/db.module';
+import AnalysisModule from '@modules/data-analysis/analysis.module';
 
 @Module({
 	imports: [
@@ -19,7 +20,8 @@ import DbModule from '@/modules/db/db.module';
 		UserModule,
 		MiraiModule,
 		GlobalModule,
-		DbModule
+		DbModule,
+		AnalysisModule
 	],
 	controllers: [AppController],
 	providers: [AppService]

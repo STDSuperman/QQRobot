@@ -6,14 +6,13 @@ import { VoteKickService } from './vote.service';
 import CommonModule from '@modules/bot-message/common-module/common.module';
 import { TianXingMessageService } from '@modules/bot-message/tianxing.service';
 import TianModule from '@modules/tian-api/tian.module';
-import { GroupAnalysisService } from '@modules/data-analysis/analysis.service';
+import GroupAnalysisModule from '@modules/data-analysis/analysis.module';
 @Module({
-	imports: [BotSendModule, UserModule, TianModule, CommonModule],
+	imports: [BotSendModule, UserModule, TianModule, CommonModule, GroupAnalysisModule],
 	providers: [
 		GroupMessageHandlerService,
 		VoteKickService,
-		TianXingMessageService,
-		GroupAnalysisService
+		TianXingMessageService
 	]
 })
 export default class GroupMessageHandlerModule {}
