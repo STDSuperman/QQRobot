@@ -140,6 +140,9 @@ adapterSettings:
 
 ```
 
+#### 音乐搜索功能插件安装
+
+若需要开启音乐搜索能力，请按照[音乐插件文档](https://github.com/khjxiaogu/MiraiSongPlugin)下载插件放置到`plugins`目录下。
 #### redis
 
 本项目需要依赖`redis`环境，故需要你安装并启动`redis`服务。
