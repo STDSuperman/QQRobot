@@ -37,7 +37,7 @@ _✨ 基于 [Mirai](https://github.com/mamoe/mirai) + [mirai-api-http](https://g
 功能
 - [x] 支持输入关键字实现群员投票踢人能力
 
-> 现已迁移到`mirai-api-http`的`2.x`斑斑，`1.x`版本[传送门](https://github.com/STDSuperman/QQRobot/tree/master-v1)
+> 现已迁移到`mirai-api-http`的`2.x`版本，`1.x`版本[传送门](https://github.com/STDSuperman/QQRobot/tree/master-v1)
 
 ## ✨预览
 <img src="https://blog-images-1257398419.cos.ap-nanjing.myqcloud.com/github/robot-preview-1.png" style="border: 1px solid #eee;padding: 5px;border-radius: 7px;box-shadow: 0 0 10px 1px #eee">
@@ -63,6 +63,7 @@ _✨ 基于 [Mirai](https://github.com/mamoe/mirai) + [mirai-api-http](https://g
 ```
 
 ***重要 !!!***
+
 ==========>
 
 如果上面步骤2安装的`mirai-api-http`版本最终是`1.x`，那么这里你可以在当前目录下把`plugins`里内容都删掉，然后手动下载这个包[mirai-api-http@2.x](https://github.com/project-mirai/mirai-api-http/releases/tag/v2.0.2)，放置到`plugins`目录下。
@@ -86,9 +87,7 @@ _✨ 基于 [Mirai](https://github.com/mamoe/mirai) + [mirai-api-http](https://g
 
 1. 按照官方文档在`Mirai Console Loader`安装目录下找到相关配置文件：`config/MiraiApiHttp(名字不一定叫这个，不过目录名一表示的含义是mirai-api-http的)/setting.yml` (没有则自行创建)
 2. 配置端口为`9999`（因为笔者项目指定的端口为这个，如果这里想自定义或者用系统默认的`8080`，则你需要将笔者项目 `src/config/index.ts` 文件中的`BOT_SERVER_PORT`改成你这里设置的端口）
-3. 修改`authKey`，或不修改，同时复制这个`authKey`，后续在笔者项目`src/config/index.ts`中`AUTH_KEY`指定为这个
-4. 将`enableWebsocket`设置为`true`
-5. 将`heartbeat`中`enable`设置为`true`
+3. 修改`verifyKey`，或不修改，同时复制这个`verifyKey`，后续在笔者项目`src/config/index.ts`中`VERIFY_KEY`指定为这个
 
 > 这里的`src/config/index.ts`主要用于一些全局配置项，克隆项目后可以进行查看修改。
 
