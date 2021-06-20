@@ -9,6 +9,7 @@ import { CommonService } from '@modules/bot-message/common-module/common.service
 import { VoteKickService } from './vote.service';
 import { TianXingMessageService } from '@modules/bot-message/tianxing.service';
 import { GroupChatMessage, Sender } from './interface/chat.interface';
+import { GroupAnalysisService } from '@modules/data-analysis/analysis.service';
 import {
 	MessageChainItemType,
 	MessageChainItemPlain,
@@ -30,7 +31,8 @@ export class GroupMessageHandlerService {
 		private configService: ConfigService,
 		private voteKickService: VoteKickService,
 		private commonService: CommonService,
-		private tianXingMessageService: TianXingMessageService
+		private tianXingMessageService: TianXingMessageService,
+		private groupAnalysisService: GroupAnalysisService
 	) {
 		this.connectionGroupList = this.configService.get(
 			'CONNECTION_GROUP_LIST'
@@ -44,6 +46,7 @@ export class GroupMessageHandlerService {
 	@OnEvent('bot.message.group')
 	handleGroupMessage(message: GroupChatMessage) {
 		this.handleGroupChatMessage(message);
+		this.groupAnalysisService.handler(message);
 	}
 
 	// 处理群消息

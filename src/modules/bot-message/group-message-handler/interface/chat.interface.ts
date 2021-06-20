@@ -24,6 +24,10 @@ export interface Sender {
 	memberName?: string;
 	permission?: keyof MemberPermission;
 	group: Group;
+	specialTitle: string;
+	joinTimestamp: number;
+	lastSpeakTimestamp: number;
+	muteTimeRemaining: number;
 }
 
 export interface GroupChatMessage {
