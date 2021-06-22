@@ -42,7 +42,7 @@ export class UserService {
 		roomId: number
 	): Promise<MemberInfo> {
 		return this.http
-			.get<AxiosRequestConfig>(`/memberInfo`, {
+			.get<AxiosRequestConfig>(`/memberProfile`, {
 				params: {
 					sessionKey: await this.configService.getRedisConfig(
 						'sessionKey'
@@ -52,12 +52,17 @@ export class UserService {
 				}
 			})
 			.pipe(
-				map((res: AxiosResponse) => {
-					if (res.data) return res.data as MemberInfo;
-					return {};
-				})
+				map<AxiosResponse, MemberInfo>(
+					(res: AxiosResponse): MemberInfo => {
+						if (res.data) {
+							res.data.avatar = `http://q1.qlogo.cn/g?b=qq&nk=${memberId}&s=640`;
+							return res.data as MemberInfo;
+						}
+						return {};
+					}
+				)
 			)
-			.toPromise();
+			.toPromise<MemberInfo>();
 	}
 
 	// 禁言

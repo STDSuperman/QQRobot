@@ -139,10 +139,8 @@ export class VoteKickService {
 			userId,
 			roomId
 		);
-		const username =
-			targetMemberInfo?.specialTitle ||
-			targetMemberInfo?.name ||
-			'未知用户';
+		const username = targetMemberInfo?.nickname;
+		('未知用户');
 		return username;
 	}
 

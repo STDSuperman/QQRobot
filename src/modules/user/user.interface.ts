@@ -1,6 +1,11 @@
 export interface MemberInfo {
-	name?: string;
-	specialTitle?: string;
+	nickname?: string;
+	email?: string;
+	age?: number;
+	level?: number;
+	sign?: number;
+	sex?: string;
+	avatar?: string;
 }
 
 export interface MuteMemberPayload {

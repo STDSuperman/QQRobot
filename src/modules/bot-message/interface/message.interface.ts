@@ -26,7 +26,7 @@ export interface MessageChainItemSource {
 
 export interface MessageChainItemImage {
 	type: MessageChainItemType.Image;
-	imageId: string;
+	imageId?: string;
 	url: string;
 	path?: string;
 }

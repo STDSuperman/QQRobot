@@ -45,6 +45,7 @@
     "cache-manager-redis-store": "^2.0.0",
     "dotenv": "^8.2.0",
     "lowdb": "^1.0.0",
+    "randexp": "^0.5.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6",

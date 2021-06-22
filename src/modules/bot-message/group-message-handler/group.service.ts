@@ -16,6 +16,7 @@ import {
 	MessageChainItem,
 	MessageChain
 } from '@modules/bot-message/interface/message.interface';
+import * as randexp from 'randexp';
 
 @Injectable()
 export class GroupMessageHandlerService {
@@ -73,11 +74,19 @@ export class GroupMessageHandlerService {
 		// 由于是多个群转发消息，所以回复和@不支持
 		message.messageChain = await this.transformMessageChain(message);
 		message.messageChain.unshift(senderInfo);
+		message.messageChain.unshift(await this.getAvatarInfo(message));
 		if (
 			this.commonService.checkIsInConnectionGroup(message?.sender?.group)
 		) {
 			this.commonService.sendMessageToGroupList(message);
 		}
+	}
+
+	async getAvatarInfo(message: GroupChatMessage): Promise<MessageChainItem> {
+		return {
+			type: MessageChainItemType.Image,
+			url: `http://q1.qlogo.cn/g?b=qq&nk=${message.sender.id}&s=40`
+		};
 	}
 
 	// 获取标识用户信息相关文案
@@ -108,7 +117,7 @@ export class GroupMessageHandlerService {
 								(item as any)?.targetId || item?.target,
 								message?.sender?.group.id
 							)
-						)?.name || '未知用户'
+						)?.nickname || '未知用户'
 					}`
 				};
 			}
