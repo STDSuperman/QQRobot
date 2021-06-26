@@ -11,7 +11,7 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 import { LoggerService } from '@modules/logger/logger.service';
 import { IBotMessage } from '@modules/ws-gateway/ws.interface';
 import { MiraiService } from '@modules/mirai/mirai.service';
-@WebSocketGateway()
+@WebSocketGateway(3001)
 export class WsGateway implements OnModuleInit {
 	constructor(
 		private miraiService: MiraiService,
@@ -58,6 +58,7 @@ export class WsGateway implements OnModuleInit {
 
 	@SubscribeMessage('event')
 	handleSubscribe(@MessageBody() data) {
+		console.log(data);
 		return data;
 	}
 }
