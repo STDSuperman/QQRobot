@@ -1,6 +1,5 @@
 import {
 	WebSocketGateway,
-	WebSocketServer,
 	SubscribeMessage,
 	MessageBody
 } from '@nestjs/websockets';
@@ -11,6 +10,7 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 import { LoggerService } from '@modules/logger/logger.service';
 import { IBotMessage } from '@modules/ws-gateway/ws.interface';
 import { MiraiService } from '@modules/mirai/mirai.service';
+import { GET_DATA_BOARD } from '@modules/ws-gateway/constant';
 @WebSocketGateway(3001)
 export class WsGateway implements OnModuleInit {
 	constructor(
@@ -20,11 +20,9 @@ export class WsGateway implements OnModuleInit {
 		private readonly logger: LoggerService
 	) {}
 
-	@WebSocketServer()
-	private bootServer: ws.Server;
-
 	private clientServer: ws;
 
+	// 连接 QQ 实例的 ws 服务
 	async onModuleInit() {
 		this.clientServer = new ws(
 			`ws://${this.configService.get(
@@ -56,9 +54,11 @@ export class WsGateway implements OnModuleInit {
 		});
 	}
 
-	@SubscribeMessage('event')
+	@SubscribeMessage(GET_DATA_BOARD)
 	handleSubscribe(@MessageBody() data) {
-		console.log(data);
-		return data;
+		return {
+			event: GET_DATA_BOARD,
+			data
+		};
 	}
 }
