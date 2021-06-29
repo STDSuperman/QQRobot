@@ -17,7 +17,6 @@ export class MysqlDBService {
 		if (date instanceof Date) {
 			date = formatDateToYMD(date, '-', false, true, true);
 		}
-		console.log(date);
 		const startTime = new Date(`${date} 00:00:00`)
 			.getTime()
 			.toString()

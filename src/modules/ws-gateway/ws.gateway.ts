@@ -1,4 +1,9 @@
-import { WebSocketGateway, SubscribeMessage } from '@nestjs/websockets';
+import {
+	WebSocketGateway,
+	SubscribeMessage,
+	WebSocketServer,
+	OnGatewayConnection
+} from '@nestjs/websockets';
 import { OnModuleInit } from '@nestjs/common';
 import * as ws from 'ws';
 import { ConfigService } from '../config/config.service';
@@ -9,7 +14,7 @@ import { MiraiService } from '@modules/mirai/mirai.service';
 import { GET_DATA_BOARD } from '@modules/ws-gateway/constant';
 import { WsService } from '@modules/ws-gateway/ws.service';
 @WebSocketGateway(3001)
-export class WsGateway implements OnModuleInit {
+export class WsGateway implements OnModuleInit, OnGatewayConnection {
 	constructor(
 		private miraiService: MiraiService,
 		private readonly configService: ConfigService,
@@ -19,6 +24,13 @@ export class WsGateway implements OnModuleInit {
 	) {}
 
 	private clientServer: ws;
+
+	@WebSocketServer()
+	private serverWsServer: ws.Server;
+
+	async handleConnection() {
+		this.serverWsServer.emit(GET_DATA_BOARD, await this.handleSubscribe());
+	}
 
 	// 连接 QQ 实例的 ws 服务
 	async onModuleInit() {
@@ -45,6 +57,10 @@ export class WsGateway implements OnModuleInit {
 			this.logger.error(JSON.stringify(e));
 		});
 		this.clientServer.on('message', async (botMessage: string) => {
+			this.serverWsServer.emit(
+				GET_DATA_BOARD,
+				await this.handleSubscribe()
+			);
 			this.eventEmitter.emit(
 				'bot.message',
 				(JSON.parse(botMessage) as IBotMessage).data
@@ -55,7 +71,6 @@ export class WsGateway implements OnModuleInit {
 	@SubscribeMessage(GET_DATA_BOARD)
 	async handleSubscribe() {
 		const data = await this.wsService.getDataBoardData();
-		console.log(data);
 		return {
 			event: GET_DATA_BOARD,
 			data
