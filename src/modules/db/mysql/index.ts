@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
+import { formatDateToYMD } from '@/common/utils';
 @Injectable()
 export class MysqlDBService {
 	private prisma: PrismaClient;
@@ -10,7 +11,13 @@ export class MysqlDBService {
 		return this.prisma.groupChatMessage.create({ data });
 	}
 
-	async findMessageListByDate(date) {
+	async findMessageListByDate(
+		date: string | Date = new Date()
+	): Promise<any[]> {
+		if (date instanceof Date) {
+			date = formatDateToYMD(date, '-', false, true, true);
+		}
+		console.log(date);
 		const startTime = new Date(`${date} 00:00:00`)
 			.getTime()
 			.toString()

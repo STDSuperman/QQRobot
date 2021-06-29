@@ -11,13 +11,15 @@ import { LoggerService } from '@modules/logger/logger.service';
 import { IBotMessage } from '@modules/ws-gateway/ws.interface';
 import { MiraiService } from '@modules/mirai/mirai.service';
 import { GET_DATA_BOARD } from '@modules/ws-gateway/constant';
+import { WsService } from '@modules/ws-gateway/ws.service';
 @WebSocketGateway(3001)
 export class WsGateway implements OnModuleInit {
 	constructor(
 		private miraiService: MiraiService,
 		private readonly configService: ConfigService,
 		private readonly eventEmitter: EventEmitter2,
-		private readonly logger: LoggerService
+		private readonly logger: LoggerService,
+		private readonly wsService: WsService
 	) {}
 
 	private clientServer: ws;
@@ -55,7 +57,9 @@ export class WsGateway implements OnModuleInit {
 	}
 
 	@SubscribeMessage(GET_DATA_BOARD)
-	handleSubscribe(@MessageBody() data) {
+	async handleSubscribe() {
+		const data = await this.wsService.getDataBoardData();
+		console.log(data);
 		return {
 			event: GET_DATA_BOARD,
 			data
