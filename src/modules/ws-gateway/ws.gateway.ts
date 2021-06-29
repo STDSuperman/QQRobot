@@ -1,8 +1,4 @@
-import {
-	WebSocketGateway,
-	SubscribeMessage,
-	MessageBody
-} from '@nestjs/websockets';
+import { WebSocketGateway, SubscribeMessage } from '@nestjs/websockets';
 import { OnModuleInit } from '@nestjs/common';
 import * as ws from 'ws';
 import { ConfigService } from '../config/config.service';
