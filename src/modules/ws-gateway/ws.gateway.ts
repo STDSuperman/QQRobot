@@ -24,12 +24,13 @@ export class WsGateway implements OnModuleInit, OnGatewayConnection {
 	) {}
 
 	private clientServer: ws;
+	private clientList: any[] = [];
 
 	@WebSocketServer()
 	private serverWsServer: ws.Server;
 
-	async handleConnection() {
-		this.serverWsServer.emit(GET_DATA_BOARD, await this.handleSubscribe());
+	async handleConnection(client) {
+		this.clientList.push(client);
 	}
 
 	// 连接 QQ 实例的 ws 服务
@@ -57,14 +58,19 @@ export class WsGateway implements OnModuleInit, OnGatewayConnection {
 			this.logger.error(JSON.stringify(e));
 		});
 		this.clientServer.on('message', async (botMessage: string) => {
-			this.serverWsServer.emit(
-				GET_DATA_BOARD,
-				await this.handleSubscribe()
-			);
 			this.eventEmitter.emit(
 				'bot.message',
 				(JSON.parse(botMessage) as IBotMessage).data
 			);
+			setTimeout(async () => {
+				this.broadcast(await this.handleSubscribe());
+			}, 1000);
+		});
+	}
+
+	broadcast(data: any) {
+		this.clientList.forEach((client) => {
+			client.send(JSON.stringify(data));
 		});
 	}
 
