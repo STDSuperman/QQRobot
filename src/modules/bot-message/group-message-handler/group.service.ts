@@ -106,7 +106,8 @@ export class GroupMessageHandlerService {
 		const messageChain = [...message.messageChain];
 		const result: MessageChain = [];
 		while (messageChain.length) {
-			const item = messageChain.shift();
+			// eslint-disable-next-line prefer-const
+			let item = messageChain.shift();
 			if (item.type === MessageChainItemType.Quote) continue;
 			if (item.type === MessageChainItemType.At) {
 				((item as unknown) as MessageChainItemPlain) = {

@@ -17,14 +17,8 @@ export class MysqlDBService {
 		if (date instanceof Date) {
 			date = formatDateToYMD(date, '-', false, true, true);
 		}
-		const startTime = new Date(`${date} 00:00:00`)
-			.getTime()
-			.toString()
-			.slice(0, 10);
-		const endTime = new Date(`${date} 23:59:59`)
-			.getTime()
-			.toString()
-			.slice(0, 10);
+		const startTime = new Date(`${date} 00:00:00`).getTime() / 1000;
+		const endTime = new Date(`${date} 23:59:59`).getTime() / 1000;
 		return this.prisma.$queryRaw(
 			`SELECT * FROM groupChatMessage where sendTimestamp between ${startTime} and ${endTime}`
 		);
