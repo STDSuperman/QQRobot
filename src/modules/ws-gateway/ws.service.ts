@@ -1,13 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { MysqlDBService } from '@modules/db/db.service';
+import { GroupAnalysisService } from '@modules/data-analysis/analysis.service';
+import { IActiveUserCountItem } from '@modules/ws-gateway/ws.interface';
 @Injectable()
 export class WsService {
-	constructor(private mysqlDBService: MysqlDBService) {}
+	constructor(private groupAnalysisService: GroupAnalysisService) {}
 
 	async getDataBoardData() {
-		const allChatMsg = await this.mysqlDBService.findMessageListByDate();
+		const allChatMsg = await this.groupAnalysisService.findMessageListByDate();
+		const activeUserCountList: IActiveUserCountItem[] = await this.groupAnalysisService.getSendMessageUserCountByDate();
 		return {
-			todayChatMsgCount: allChatMsg.length
+			todayChatMsgCount: allChatMsg.length,
+			activeUserCount: activeUserCountList[0].activeUserCount
 		};
 	}
 }

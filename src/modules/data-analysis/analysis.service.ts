@@ -4,6 +4,8 @@ import {
 	Sender
 } from '@modules/bot-message/group-message-handler/interface/chat.interface';
 import { MysqlDBService } from '@modules/db/db.service';
+import { formatDateToYMD } from '@/common/utils';
+import { IDateString } from '@modules/data-analysis/analysis.interface';
 
 @Injectable()
 export class GroupAnalysisService {
@@ -26,7 +28,22 @@ export class GroupAnalysisService {
 		return this.mysqlDB.createGroupChatMessage(data);
 	}
 
-	async findMessageListByDate(date) {
-		return this.mysqlDB.findMessageListByDate(date);
+	formatDate2StartEnd(date: IDateString) {
+		if (date instanceof Date) {
+			date = formatDateToYMD(date, '-', false, true, true);
+		}
+		const startTime = new Date(`${date} 00:00:00`).getTime() / 1000;
+		const endTime = new Date(`${date} 23:59:59`).getTime() / 1000;
+		return [startTime, endTime];
+	}
+
+	async findMessageListByDate(date: IDateString = new Date()) {
+		const [startTime, endTime] = this.formatDate2StartEnd(date);
+		return this.mysqlDB.findMessageListByDate(startTime, endTime);
+	}
+
+	async getSendMessageUserCountByDate(date = new Date()) {
+		const [startTime, endTime] = this.formatDate2StartEnd(date);
+		return this.mysqlDB.getSendMessageUserCountByDate(startTime, endTime);
 	}
 }

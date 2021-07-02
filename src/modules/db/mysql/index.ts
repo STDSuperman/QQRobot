@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import { formatDateToYMD } from '@/common/utils';
 @Injectable()
 export class MysqlDBService {
 	private prisma: PrismaClient;
@@ -10,17 +9,23 @@ export class MysqlDBService {
 	async createGroupChatMessage(data) {
 		return this.prisma.groupChatMessage.create({ data });
 	}
-
+	// 查询特定日期当天群聊数据
 	async findMessageListByDate(
-		date: string | Date = new Date()
+		startTime: number,
+		endTime: number
 	): Promise<any[]> {
-		if (date instanceof Date) {
-			date = formatDateToYMD(date, '-', false, true, true);
-		}
-		const startTime = new Date(`${date} 00:00:00`).getTime() / 1000;
-		const endTime = new Date(`${date} 23:59:59`).getTime() / 1000;
 		return this.prisma.$queryRaw(
 			`SELECT * FROM groupChatMessage where sendTimestamp between ${startTime} and ${endTime}`
+		);
+	}
+
+	// 查询当天群聊活跃人数
+	async getSendMessageUserCountByDate(
+		startTime: number,
+		endTime: number
+	): Promise<any[]> {
+		return this.prisma.$queryRaw(
+			`SELECT count(distinct memberId) as activeUserCount FROM groupChatMessage where sendTimestamp between ${startTime} and ${endTime}`
 		);
 	}
 }

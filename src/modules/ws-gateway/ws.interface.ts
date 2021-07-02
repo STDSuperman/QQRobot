@@ -5,3 +5,7 @@ export interface IBotMessage {
 	syncId: number;
 	data: GroupChatMessage | FriendMessage;
 }
+
+export interface IActiveUserCountItem {
+	activeUserCount: number;
+}
