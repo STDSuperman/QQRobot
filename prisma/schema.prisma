@@ -12,7 +12,7 @@ generator client {
 
 model GroupChatMessage {
     id BigInt @id @default(autoincrement())
-    sendTimestamp  BigInt
+    sendTimestamp  DateTime
     groupName  String
     groupId BigInt
     permission String
