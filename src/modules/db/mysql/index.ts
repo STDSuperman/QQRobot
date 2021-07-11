@@ -7,7 +7,7 @@ export class MysqlDBService {
 		this.prisma = new PrismaClient();
 	}
 	async createGroupChatMessage(data) {
-		return this.prisma.groupChatMessage.create({ data });
+		return this.prisma.groupchatmessage.create({ data });
 	}
 	// 查询特定日期当天群聊数据
 	async findMessageListByDate(
