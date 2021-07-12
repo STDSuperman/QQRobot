@@ -18,7 +18,7 @@ export class GroupAnalysisService {
 	async saveMessageInfo(message: GroupChatMessage) {
 		const sender: Sender = message.sender;
 		const data = {
-			sendTimestamp: sender.lastSpeakTimestamp,
+			sendTimestamp: new Date(sender.lastSpeakTimestamp * 1000),
 			groupName: sender.group.name,
 			groupId: sender.group.id,
 			permission: sender.permission,
@@ -28,12 +28,12 @@ export class GroupAnalysisService {
 		return this.mysqlDB.createGroupChatMessage(data);
 	}
 
-	formatDate2StartEnd(date: IDateString) {
+	formatDate2StartEnd(date: IDateString): string[] {
 		if (date instanceof Date) {
 			date = formatDateToYMD(date, '-', false, true, true);
 		}
-		const startTime = new Date(`${date} 00:00:00`).getTime() / 1000;
-		const endTime = new Date(`${date} 23:59:59`).getTime() / 1000;
+		const startTime = `${date} 00:00:00`;
+		const endTime = `${date} 23:59:59`;
 		return [startTime, endTime];
 	}
 

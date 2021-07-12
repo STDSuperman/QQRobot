@@ -11,21 +11,21 @@ export class MysqlDBService {
 	}
 	// 查询特定日期当天群聊数据
 	async findMessageListByDate(
-		startTime: number,
-		endTime: number
+		startTime: string,
+		endTime: string
 	): Promise<any[]> {
 		return this.prisma.$queryRaw(
-			`SELECT * FROM groupChatMessage where sendTimestamp between ${startTime} and ${endTime}`
+			`SELECT * FROM groupChatMessage where sendTimestamp between '${startTime}' and '${endTime}'`
 		);
 	}
 
 	// 查询当天群聊活跃人数
 	async getSendMessageUserCountByDate(
-		startTime: number,
-		endTime: number
+		startTime: string,
+		endTime: string
 	): Promise<any[]> {
 		return this.prisma.$queryRaw(
-			`SELECT count(distinct memberId) as activeUserCount FROM groupChatMessage where sendTimestamp between ${startTime} and ${endTime}`
+			`SELECT count(distinct memberId) as activeUserCount FROM groupChatMessage where sendTimestamp between '${startTime}' and '${endTime}'`
 		);
 	}
 }
