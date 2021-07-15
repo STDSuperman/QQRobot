@@ -15,7 +15,7 @@ export class MysqlDBService {
 		endTime: string
 	): Promise<any[]> {
 		return this.prisma.$queryRaw(
-			`SELECT * FROM groupChatMessage where sendTimestamp between '${startTime}' and '${endTime}'`
+			`SELECT * FROM groupchatmessage where sendTimestamp between '${startTime}' and '${endTime}'`
 		);
 	}
 
@@ -25,7 +25,7 @@ export class MysqlDBService {
 		endTime: string
 	): Promise<any[]> {
 		return this.prisma.$queryRaw(
-			`SELECT count(distinct memberId) as activeUserCount FROM groupChatMessage where sendTimestamp between '${startTime}' and '${endTime}'`
+			`SELECT count(distinct memberId) as activeUserCount FROM groupchatmessage where sendTimestamp between '${startTime}' and '${endTime}'`
 		);
 	}
 }

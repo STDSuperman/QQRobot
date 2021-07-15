@@ -24,8 +24,9 @@
     "postinstall": "husky install",
     "prepare": "husky install",
     "commit": "git add -A && git-cz",
-    "prisma:push": "prisma2 db push --accept-data-loss",
-    "prisma:gen": "prisma2 generate"
+    "ps:push": "prisma2 db push --accept-data-loss",
+    "ps:gen": "prisma2 generate",
+    "ps:pull": "prisma2 db pull"
   },
   "keywords": [
     "TypeScript",
