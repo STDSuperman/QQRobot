@@ -24,5 +24,6 @@ export default {
 		timeout: 5000,
 		maxRedirects: 5,
 		baseURL: BOT_BASE_URL
-	}
+	},
+	DB_NAME: 'groupchatmessage'
 };
