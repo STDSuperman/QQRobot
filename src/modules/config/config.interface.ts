@@ -13,6 +13,10 @@ export interface GlobalConfig {
 export interface RedisConfig {
 	sessionKey: string;
 	voteKickStatus: boolean;
+	sendUserMsgData: {
+		total: number;
+		dateMap: Record<string, GroupSendMessageInfo[]>;
+	};
 	[target: number]: string;
 }
 

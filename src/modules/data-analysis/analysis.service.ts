@@ -6,10 +6,14 @@ import {
 import { MysqlDBService } from '@modules/db/db.service';
 import { formatDateToYMD } from '@/common/utils';
 import { IDateString } from '@modules/data-analysis/analysis.interface';
+import { ConfigService } from '@modules/config/config.service';
 
 @Injectable()
 export class GroupAnalysisService {
-	constructor(private mysqlDB: MysqlDBService) {}
+	constructor(
+		private mysqlDB: MysqlDBService,
+		private configService: ConfigService
+	) {}
 
 	handler(message: GroupChatMessage) {
 		this.saveMessageInfo(message);
@@ -17,7 +21,7 @@ export class GroupAnalysisService {
 
 	async saveMessageInfo(message: GroupChatMessage) {
 		const sender: Sender = message.sender;
-		const data = {
+		const data: GroupSendMessageInfo = {
 			sendTimestamp: new Date(sender.lastSpeakTimestamp * 1000),
 			groupName: sender.group.name,
 			groupId: sender.group.id,
@@ -28,7 +32,7 @@ export class GroupAnalysisService {
 		return this.mysqlDB.createGroupChatMessage(data);
 	}
 
-	formatDate2StartEnd(date: IDateString): string[] {
+	formatDate2StartEnd(date: IDateString): [string, string] {
 		if (date instanceof Date) {
 			date = formatDateToYMD(date, '-', false, true, true);
 		}
@@ -45,5 +49,22 @@ export class GroupAnalysisService {
 	async getSendMessageUserCountByDate(date = new Date()) {
 		const [startTime, endTime] = this.formatDate2StartEnd(date);
 		return this.mysqlDB.getSendMessageUserCountByDate(startTime, endTime);
+	}
+
+	async parseDataList() {
+		let result = await this.configService.getRedisConfig('sendUserMsgData');
+		if (result) return result;
+		const list = await this.mysqlDB.findAllMessageList();
+		const dateMap: Record<string, GroupSendMessageInfo[]> = {};
+		list.forEach((item: GroupSendMessageInfo) => {
+			if (!dateMap[item.memberId]) dateMap[item.memberId] = [];
+			dateMap[item.memberId].push(item);
+		});
+		result = {
+			total: list.length,
+			dateMap
+		};
+		this.configService.setRedisConfig('sendUserMsgData', result);
+		return result;
 	}
 }

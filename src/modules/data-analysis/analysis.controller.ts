@@ -9,4 +9,9 @@ export class AnalysisController {
 	async getSpeakDataList(@Query('date') date: string) {
 		return this.groupAnalysisService.findMessageListByDate(date);
 	}
+
+	@Get('/all/list')
+	async getAllDataList() {
+		return this.groupAnalysisService.parseDataList();
+	}
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import config from '@/config';
+
+const { DB_NAME } = config;
 @Injectable()
 export class MysqlDBService {
 	private prisma: PrismaClient;
@@ -8,7 +10,7 @@ export class MysqlDBService {
 		this.prisma = new PrismaClient();
 	}
 	async createGroupChatMessage(data) {
-		return this.prisma[config.DB_NAME].create({ data });
+		return this.prisma[DB_NAME].create({ data });
 	}
 	// 查询特定日期当天群聊数据
 	async findMessageListByDate(
@@ -16,7 +18,7 @@ export class MysqlDBService {
 		endTime: string
 	): Promise<any[]> {
 		return this.prisma.$queryRaw(
-			`SELECT * FROM ${config.DB_NAME} where sendTimestamp between '${startTime}' and '${endTime}'`
+			`SELECT * FROM ${DB_NAME} where sendTimestamp between '${startTime}' and '${endTime}'`
 		);
 	}
 
@@ -26,7 +28,11 @@ export class MysqlDBService {
 		endTime: string
 	): Promise<any[]> {
 		return this.prisma.$queryRaw(
-			`SELECT count(distinct memberId) as activeUserCount FROM ${config.DB_NAME} where sendTimestamp between '${startTime}' and '${endTime}'`
+			`SELECT count(distinct memberId) as activeUserCount FROM ${DB_NAME} where sendTimestamp between '${startTime}' and '${endTime}'`
 		);
+	}
+
+	async findAllMessageList(): Promise<GroupSendMessageInfo[]> {
+		return this.prisma[DB_NAME].findMany();
 	}
 }
