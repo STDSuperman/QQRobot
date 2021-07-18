@@ -9,4 +9,9 @@ declare global {
 		memberName: string;
 		memberId: number;
 	}
+
+	interface GroupUserSendListInfo {
+		total: number;
+		dateMap: Record<string, GroupSendMessageInfo[]>;
+	}
 }

@@ -143,9 +143,11 @@ adapterSettings:
 #### 音乐搜索功能插件安装
 
 若需要开启音乐搜索能力，请按照[音乐插件文档](https://github.com/khjxiaogu/MiraiSongPlugin)下载插件放置到`plugins`目录下。
-#### redis
+#### redis & mysql
 
-本项目需要依赖`redis`环境，故需要你安装并启动`redis`服务。
+本项目需要依赖`redis`与`mysql`环境，故需要你安装并启动`redis`和`mysql`服务。
+
+同时在下面提到的`.env`文件中添加数据库配置`DATABASE_URL`
 
 #### 启动
 
@@ -171,6 +173,7 @@ TIAN_API_KEY=xxx
 QQAccount=xxx
 QQPassword=xxx
 SERVER_HOST=xxx
+DATABASE_URL=mysql://root:password@localhost:3306/QQROBOT
 ```
 
 ##### 配置介绍

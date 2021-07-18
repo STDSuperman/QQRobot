@@ -51,20 +51,21 @@ export class GroupAnalysisService {
 		return this.mysqlDB.getSendMessageUserCountByDate(startTime, endTime);
 	}
 
-	async parseDataList() {
-		let result = await this.configService.getRedisConfig('sendUserMsgData');
-		if (result) return result;
+	async setParseUserSendDataList(): Promise<GroupUserSendListInfo> {
 		const list = await this.mysqlDB.findAllMessageList();
 		const dateMap: Record<string, GroupSendMessageInfo[]> = {};
 		list.forEach((item: GroupSendMessageInfo) => {
 			if (!dateMap[item.memberId]) dateMap[item.memberId] = [];
 			dateMap[item.memberId].push(item);
 		});
-		result = {
+		const result: GroupUserSendListInfo = {
 			total: list.length,
 			dateMap
 		};
-		this.configService.setRedisConfig('sendUserMsgData', result);
+		this.configService.setRedisConfig(
+			'sendUserMsgData',
+			JSON.stringify(result)
+		);
 		return result;
 	}
 }

@@ -13,6 +13,7 @@ import { IBotMessage } from '@modules/ws-gateway/ws.interface';
 import { MiraiService } from '@modules/mirai/mirai.service';
 import { GET_DATA_BOARD } from '@modules/ws-gateway/constant';
 import { WsService } from '@modules/ws-gateway/ws.service';
+import { debounceTime } from '@utils/index';
 @WebSocketGateway(3001)
 export class WsGateway implements OnModuleInit, OnGatewayConnection {
 	constructor(
@@ -57,14 +58,17 @@ export class WsGateway implements OnModuleInit, OnGatewayConnection {
 			console.log(e);
 			this.logger.error(JSON.stringify(e));
 		});
+
+		const broadcastMsg = debounceTime(async () => {
+			this.broadcast(await this.handleSubscribe());
+		}, 1000);
+
 		this.clientServer.on('message', async (botMessage: string) => {
 			this.eventEmitter.emit(
 				'bot.message',
 				(JSON.parse(botMessage) as IBotMessage).data
 			);
-			setTimeout(async () => {
-				this.broadcast(await this.handleSubscribe());
-			}, 1000);
+			broadcastMsg();
 		});
 	}
 

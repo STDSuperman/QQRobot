@@ -5,7 +5,8 @@ module.exports = {
 		extensions: ['.ts', '.js', '.json'],
 		alias: {
 			'@': path.resolve(__dirname, 'src'),
-			'@modules': path.resolve(__dirname, 'src/modules')
+			'@modules': path.resolve(__dirname, 'src/modules'),
+			'@utils': path.resolve(__dirname, 'src/common/utils')
 		}
 	},
 	module: {

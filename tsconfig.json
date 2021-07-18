@@ -13,7 +13,8 @@
     "incremental": true,
     "paths": {
       "@/*": ["src/*"],
-      "@modules/*": ["src/modules/*"]
+      "@modules/*": ["src/modules/*"],
+      "@utils/*": ["src/common//utils/*"]
     }
   }
 }

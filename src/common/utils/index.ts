@@ -56,3 +56,30 @@ export function formatDateToYMD(
 		return (hasYear ? year + split : '') + month + split + day;
 	}
 }
+
+export function debounceTime(
+	fn: () => void,
+	delay: number,
+	immediate?: boolean
+) {
+	let timer = null;
+	return (...args) => {
+		if (timer) clearTimeout(timer);
+		if (immediate) {
+			const callTime = !timer;
+			setTimeout(() => (timer = null), delay);
+			callTime && fn.apply(this, args);
+		} else {
+			timer = setTimeout(() => fn.apply(this, args), delay);
+		}
+	};
+}
+
+export function rewriteGlobalMethod() {
+	const originJsonStringify = JSON.stringify;
+	JSON.stringify = (val: any) => {
+		return originJsonStringify(val, (key, val) =>
+			typeof val === 'bigint' ? val.toString : val
+		);
+	};
+}

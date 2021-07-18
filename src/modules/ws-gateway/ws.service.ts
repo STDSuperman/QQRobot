@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { GroupAnalysisService } from '@modules/data-analysis/analysis.service';
 import { IActiveUserCountItem } from '@modules/ws-gateway/ws.interface';
+import { debounceTime } from '@utils/index';
+
 @Injectable()
 export class WsService {
 	constructor(private groupAnalysisService: GroupAnalysisService) {}
