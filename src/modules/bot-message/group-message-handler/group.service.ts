@@ -16,7 +16,6 @@ import {
 	MessageChainItem,
 	MessageChain
 } from '@modules/bot-message/interface/message.interface';
-import * as randexp from 'randexp';
 
 @Injectable()
 export class GroupMessageHandlerService {
@@ -52,7 +51,7 @@ export class GroupMessageHandlerService {
 
 	// 处理群消息
 	async handleGroupChatMessage(message: GroupChatMessage): Promise<void> {
-		this.forwardGroupMessage(message);
+		// this.forwardGroupMessage(message);
 		this.messageChainResolve(message);
 	}
 
