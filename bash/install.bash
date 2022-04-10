@@ -1,13 +1,6 @@
 #!/bin/bash
  
+# apk add --no-cache --virtual .build-deps-yarn curl expect bash \
+apt-get update && apt-get install -y --no-install-recommends curl bash nodejs npm git
 curl https://sh.rustup.rs -sSf | sh
 echo $REPLAY
-source $HOME/.cargo/env
-mkdir mcl
-cd mcl
-git clone https://github.com/iTXTech/mcl-installer.git
-cd mcl-installer
-cargo build --features native-tls --release
-cd target/release
-cd ../../..
-strip mcl-installer
