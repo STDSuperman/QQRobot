@@ -2,11 +2,11 @@
 # FROM node:16-alpine
 FROM --platform=linux/amd64 ubuntu
 WORKDIR /code
-RUN groupadd -g 1000 node \
-    && useradd -u 1000 -g node -s /bin/sh node \
+RUN groupadd -g 1000 -r node \
+    && useradd -u 1000 -r -g node -s /bin/sh node\
     && apt-get update && apt-get install wget unzip nodejs language-pack-zh-hans npm -y --no-install-recommends \
     && mkdir mirai \
-    && chown node /code/mirai
+    && chown -R node /code/mirai
 # USER node
 COPY --chown=node:node . .
 # COPY . .
@@ -15,12 +15,14 @@ RUN \
   cd mirai \
   && mkdir mcl \
   && cd mcl \
+  && echo 'export LANG="zh_CN.UTF-8"'  >> /etc/profile \
   && echo 'export PATH="/code/temp/jdk-17/bin:$PATH"' >> ~/.bashrc \
   # && echo 'nameserver 8.8.8.8' >> /etc/resolv.conf \
   # && chmod -R +x /code/bash \
   # && bash /code/bash/install.bash \
   && /bin/bash -c "source ~/.bashrc" \
-  && . ~/.bashrc \
+  && /bin/bash -c "source /etc/profile" \
+  # && . ~/.bashrc \
   && wget https://github.com/iTXTech/mirai-console-loader/releases/download/v1.2.2/mcl-1.2.2.zip \
   && unzip mcl-1.2.2.zip \
   && chmod +x mcl \
