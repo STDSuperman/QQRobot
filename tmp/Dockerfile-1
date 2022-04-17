@@ -1,5 +1,9 @@
 # FROM node:16-alpine
-FROM ubuntu
+FROM ubuntu:alpine
+
+LABEL com.example.version="0.0.1-beta"
+LABEL maintainer="STDSuperman (陌小路) <2750556766@qq.com>"
+
 WORKDIR /code
 RUN groupadd -g 1000 node \
     && useradd -u 1000 -g node -s /bin/sh node
@@ -25,3 +29,8 @@ RUN \
   # && apk del .build-deps-yarn
 USER node
 CMD ["/bin/bash"]
+
+LABEL \
+  org.label-schema.build-date="$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+  org.label-schema.version="$DOCKER_TAG" \
+  org.label-schema.name="QQRobot" \
