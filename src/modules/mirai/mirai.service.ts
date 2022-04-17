@@ -43,6 +43,7 @@ export class MiraiService {
 		let isVerified = await this.verify(sessionKey);
 		if (!sessionKey || !isVerified) {
 			sessionKey = await this.fetchSessionKey();
+			if (!sessionKey) return '';
 			await this.configService.setRedisConfig('sessionKey', sessionKey);
 			isVerified = await this.verify(sessionKey);
 			!isVerified && console.error('verify faild');

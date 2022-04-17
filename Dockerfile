@@ -32,11 +32,12 @@ RUN \
   && echo 'export LANG="zh_CN.UTF-8"'  >> /etc/profile \
   && echo 'export PATH="/mirai/temp/jdk-17/bin:$PATH"' >> ~/.bashrc \
   # && cat ~/.bashrc \
-  && source ~/.bashrc \
-  && source /etc/profile \
+  && . ~/.bashrc \
+  && . /etc/profile \
+  && export PATH="/mirai/temp/jdk-17/bin:$PATH" \
   && mkdir -p /mirai/mcl/config/net.mamoe.mirai-api-http \
   && cat /mirai/config/mirai-api-http-setting.yml > /mirai/mcl/config/net.mamoe.mirai-api-http/setting.yml \
-  # && ./mcl --update-package net.mamoe:mirai-api-http --channel stable-v2 --type plugin \
+  && ./mcl --update-package net.mamoe:mirai-api-http --channel stable-v2 --type plugin \
   # && wget -P /code/temp https://download.java.net/java/GA/jdk17.0.1/2a2082e5a09d4267845be086888add4f/12/GPL/openjdk-17.0.1_linux-x64_bin.tar.gz \
   # && tar xvf /code/temp/openjdk-17.0.1_linux-x64_bin.tar.gz \
   && apt-get purge --auto-remove \
