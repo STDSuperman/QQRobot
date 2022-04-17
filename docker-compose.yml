@@ -1,4 +1,14 @@
 services:
+  app:
+    depends_on:
+      - mysql
+      - redis
+    ports:
+      - "9999:9999"
+    build: .
+    volumes:
+      - .:/code
+
   redis:
     image: "redis:alpine"
     ports:
@@ -12,7 +22,3 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 110120
       MYSQL_DATABASE: "QQROBOT"
-  app:
-    build: .
-    volumes:
-      - .:/code
