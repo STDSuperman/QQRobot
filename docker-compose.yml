@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 services:
   app:
     depends_on:
@@ -9,6 +9,9 @@ services:
     build: .
     volumes:
       - .:/code
+    stdin_open: true
+    tty: true
+    restart: 'always'
 
   redis:
     image: "redis:alpine"
