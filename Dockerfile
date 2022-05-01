@@ -14,7 +14,7 @@ RUN groupadd -g 1000 -r node \
     && echo -e 'LANG="zh_CN.UTF-8"\nLANGUAGE="zh_CN:zh"\nLC_NUMERIC="zh_CN"\nLC_TIME="zh_CN"\nLC_MONETARY="zh_CN"\nLC_PAPER="zh_CN"\nLC_NAME="zh_CN"\nLC_ADDRESS="zh_CN"\nLC_TELEPHONE="zh_CN"\nLC_MEASUREMENT="zh_CN"\nLC_IDENTIFICATION="zh_CN"\nLC_ALL="zh_CN.UTF-8"' >> /etc/environment
 WORKDIR /mirai/mcl
 # USER node
-COPY --chown=node:node ./mirai /mirai
+COPY --chown=node:node ./docker-config/mirai /mirai
 # COPY . .
 SHELL ["/bin/bash", "-c"]
 RUN \
@@ -42,6 +42,7 @@ RUN \
   # && tar xvf /code/temp/openjdk-17.0.1_linux-x64_bin.tar.gz \
   && apt-get purge --auto-remove \
   && rm -rf /tmp/* /var/lib/apt/lists/*
+RUN yarn start:dev
 # USER node
 # CMD ["/code/mcl/mcl"]
 # CMD ["cd", '/mirai/mcl', '&&', './mcl']

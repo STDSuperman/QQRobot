@@ -14,10 +14,12 @@ services:
     restart: 'always'
 
   redis:
-    image: "redis:alpine"
+    image: "redis"
     ports:
       - "6379:6379"
-    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - ./docker-config/redis:/etc/redis
+    command: redis-server /etc/redis/redis.conf --appendonly yes
 
   mysql:
     image: "mysql:5.7"
