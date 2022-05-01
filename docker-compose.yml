@@ -1,0 +1,32 @@
+version: '3.4'
+services:
+  app:
+    image: superuman/qq_robot
+    depends_on:
+      - mysql
+      - redis
+    ports:
+      - "9999:9999"
+    # build: .
+    volumes:
+      - .:/code
+    stdin_open: true
+    tty: true
+    restart: 'always'
+
+  redis:
+    image: "redis"
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./docker-config/redis:/etc/redis
+    command: redis-server /etc/redis/redis.conf --appendonly yes
+
+  mysql:
+    image: "mysql:5.7"
+    platform: linux/amd64
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 110120
+      MYSQL_DATABASE: "QQROBOT"
