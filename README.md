@@ -91,7 +91,49 @@ _✨ 基于 [Mirai](https://github.com/mamoe/mirai) + [mirai-api-http](https://g
 
 相关`API`地址：[mirai-api-http API 文档](https://project-mirai.github.io/mirai-api-http/)
 > 这里主要是因为笔者服务端采用`Nodejs`环境进行开发，故需要该插件提供`RESTful`接口与`websocket`连接与`QQ`通信。
-#### 配置`mirai-api-http`全局配置：
+
+#### 音乐搜索功能插件安装
+
+若需要开启音乐搜索能力，请按照[音乐插件文档](https://github.com/khjxiaogu/MiraiSongPlugin)下载插件放置到`plugins`目录下。
+#### redis & mysql
+
+本项目需要依赖`redis`与`mysql`环境，故需要你安装并启动`redis`和`mysql`服务。
+
+同时在下面提到的`.env`文件中添加数据库配置`DATABASE_URL`
+
+#### 启动
+
+1. 启动`MCL`（上面安装的）。
+2. 输入登录指令，将一个用于机器人的`QQ`号进行登录。
+
+在上述步骤都完成之后，你需要安装的东西基本完毕了，可以启动本项目进行进一步服务端开发了。
+
+#### 克隆（下载）项目
+
+```bash
+git clone git@github.com:STDSuperman/QQRobot.git
+```
+#### 项目启动
+
+进入克隆后的项目，执行安装命令，安装完毕之后执行启动命令。
+##### 使用npm
+
+```shell
+npm i
+npm run start
+```
+
+##### 使用yarn
+
+```shell
+yarn
+yarn start
+```
+
+
+### 项目配置
+
+#### `mirai-api-http`全局配置：
 
 1. 按照官方文档在`Mirai Console Loader`安装目录下找到相关配置文件：`config/MiraiApiHttp(名字不一定叫这个，不过目录名一表示的含义是mirai-api-http的)/setting.yml` (没有则自行创建)
 2. 配置端口为`9999`（因为笔者项目指定的端口为这个，如果这里想自定义或者用系统默认的`8080`，则你需要将笔者项目 `src/config/index.ts` 文件中的`BOT_SERVER_PORT`改成你这里设置的端口）
@@ -145,30 +187,6 @@ adapterSettings:
 
 ```
 
-#### 音乐搜索功能插件安装
-
-若需要开启音乐搜索能力，请按照[音乐插件文档](https://github.com/khjxiaogu/MiraiSongPlugin)下载插件放置到`plugins`目录下。
-#### redis & mysql
-
-本项目需要依赖`redis`与`mysql`环境，故需要你安装并启动`redis`和`mysql`服务。
-
-同时在下面提到的`.env`文件中添加数据库配置`DATABASE_URL`
-
-#### 启动
-
-1. 启动`MCL`（上面安装的）。
-2. 输入登录指令，将一个用于机器人的`QQ`号进行登录。
-
-在上述步骤都完成之后，你需要安装的东西基本完毕了，可以启动本项目进行进一步服务端开发了。
-
-#### 克隆（下载）项目
-
-```bash
-git clone git@github.com:STDSuperman/QQRobot.git
-```
-
-#### 项目配置
-
 > `src/config/index.ts`文件中包含的配置以及含义请打开该文件查看注释部分。
 
 除了前面提到的需要修改`src/config/index.ts`配置之外，你需要在当前项目根目录下新建一个`.env`文件，用于配置一些私密数据，具体值如下：
@@ -181,7 +199,7 @@ SERVER_HOST=xxx
 DATABASE_URL=mysql://root:password@localhost:3306/QQROBOT
 ```
 
-##### 配置介绍
+#### 环境配置介绍
 
 | 配置项       | 相关介绍                                                     |                                               |
 | ------------ | ------------------------------------------------------------ | --------------------------------------------- |
@@ -191,20 +209,3 @@ DATABASE_URL=mysql://root:password@localhost:3306/QQROBOT
 | SERVER_HOST  | 你登录的`mirai`服务地址（如果本机就`127.0.0.1`或`localhost`即可） | 必填。                                        |
 
 > 项目中需要引入机器人的群，需要预先将机器人账号设为管理员，否则投票踢人功能会存在异常。
-
-#### 项目启动
-
-进入克隆后的项目，执行安装命令，安装完毕之后执行启动命令。
-##### 使用npm
-
-```shell
-npm i
-npm run start
-```
-
-##### 使用yarn
-
-```shell
-yarn
-yarn start
-```

@@ -2,9 +2,10 @@
 FROM --platform=linux/amd64 ubuntu:16.04
 WORKDIR /mirai
 RUN groupadd -g 1000 -r node \
-    && useradd -u 1000 -r -g node -s /bin/sh node\
+    && useradd -u 1000 -r -g node -s /bin/sh node \
     && apt-get update && apt-get install wget unzip nodejs language-pack-zh-hans npm -y --no-install-recommends \
     && mkdir mcl \
+    && mkdir plugins \
     && cd mcl \
     && wget https://github.com/iTXTech/mirai-console-loader/releases/download/v1.2.2/mcl-1.2.2.zip \
     && unzip mcl-1.2.2.zip \
@@ -37,6 +38,7 @@ RUN \
   && mkdir -p /mirai/mcl/config/net.mamoe.mirai-api-http \
   && cat /mirai/config/mirai-api-http-setting.yml > /mirai/mcl/config/net.mamoe.mirai-api-http/setting.yml \
   && ./mcl --update-package net.mamoe:mirai-api-http --channel stable-v2 --type plugin \
+  && wget -P /mirai/mcl/plugins https://github.com/khjxiaogu/MiraiSongPlugin/releases/download/v1.1.7/MiraiSongPlugin-2.7-1.1.7.jar \
   # && wget -P /code/temp https://download.java.net/java/GA/jdk17.0.1/2a2082e5a09d4267845be086888add4f/12/GPL/openjdk-17.0.1_linux-x64_bin.tar.gz \
   # && tar xvf /code/temp/openjdk-17.0.1_linux-x64_bin.tar.gz \
   && apt-get purge --auto-remove \
