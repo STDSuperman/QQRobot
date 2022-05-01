@@ -1,12 +1,13 @@
 version: '3.4'
 services:
   app:
+    image: superuman/qq_robot
     depends_on:
       - mysql
       - redis
     ports:
       - "9999:9999"
-    build: .
+    # build: .
     volumes:
       - .:/code
     stdin_open: true
