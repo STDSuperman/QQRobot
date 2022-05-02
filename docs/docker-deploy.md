@@ -41,7 +41,7 @@ ca6005536b2a   redis         "docker-entrypoint.s…"   5 hours ago    Up 2 hour
 滑动验证：
 ![滑动验证](https://blog-images-1257398419.cos.ap-nanjing.myqcloud.com/github/mirai-%E6%BB%91%E5%8A%A8%E9%AA%8C%E8%AF%81.png)
 
-然后滑动滑块验证完之后，会有一个请求，把这个请求返回值里的 `token` 复制，接着打开控制台，粘贴到终端即可。
+然后滑动滑块验证完之后，会有一个请求，把这个请求返回值里的 `ticket` 复制，接着打开控制台，粘贴到终端即可。
 
 ![接口](https://blog-images-1257398419.cos.ap-nanjing.myqcloud.com/docker/capture.png)
 
