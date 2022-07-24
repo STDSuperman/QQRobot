@@ -47,12 +47,12 @@ _✨ 基于 [Mirai](https://github.com/mamoe/mirai) + [mirai-api-http](https://g
 
 ## 🚀 开发手册
 
-### 🐳 Docker 方式（ 强烈推荐！！！）
+### 🐳 Docker 方式安装（ 强烈推荐！！！）
 
 **传送门：** [Docker 方式安装环境](https://github.com/STDSuperman/QQRobot/blob/master/docs/docker-deploy.md)
 
 > 如果采用手动方式，你会发现很麻烦。
-### 🐌 手动方式
+### 🐌 手动方式安装
 整体环境依赖于`Mirai`，故首先需要安装相关环境提供`QQ`托管能力。
 
 #### 安装 Mirai 环境
